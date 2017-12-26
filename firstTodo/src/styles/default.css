@@ -2,7 +2,9 @@
 
 @import "base.css";
 
-@import "project/todos-header_title.css";
+@import "project/todo-title1.css";
+@import "project/todo-title2.css";
+@import "project/todo-title3.css";
 @import "project/todos-container.css";
 @import "project/todos-add.css";
 @import "project/todos-list.css";
