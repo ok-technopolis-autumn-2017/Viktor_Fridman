@@ -28,6 +28,13 @@
     cursor: pointer;
 }
 
+.todoListItemCheck:checked ~ .todoListItemCheck_icon,
+.todoListItemCheck_ready:checked ~ .todoListItemCheck_ready_icon{
+    background: url(../../images/icons/completed.png) no-repeat center;
+    border: 1px solid rgb(150,215,203);
+}
+
+
 .todoListItemCheck_icon,
 .todoListItemCheck_ready_icon{
     position: absolute;
@@ -41,17 +48,10 @@
     border-radius: 50%;
     vertical-align: middle;
     border: 1px solid rgb(235,235,235);
-    background: #ffffff;
+    background: #fffffe; <!-- МУХАХАХАХАА -->
     -webkit-appearance: none;
 }
 
-
-.todoListItemCheck:checked ~ .todoListItemCheck_icon,
-.todoListItemCheck_ready:checked ~ .todoListItemCheck_ready_icon{
-    background: url(../../images/icons/completed.png) 0 no-repeat;
-    background-position: center;
-    border: 1px solid rgb(150,215,203);
-}
 
 .todoListItemName,
 .todoListItemName_ready{
@@ -95,8 +95,7 @@
     width: 44px;
     position: relative;
     float: right;
-    background: url("../../images/icons/close.png") 0 no-repeat;
-    background-position: center;
+    background: url("../../images/icons/close.png") no-repeat center;
     border: none;
     cursor: pointer;
 }
