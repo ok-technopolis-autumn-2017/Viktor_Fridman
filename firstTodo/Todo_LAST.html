@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Todo Todo Todo-Todo-Todo...
+    </title>
+
+    <link rel="stylesheet" href="src/styles/default.css">
+    <script type="text/javascript" src="src/js/controller.js"></script>
+    <script type="text/javascript" src="src/js/model.js"></script>
+    <script type="text/javascript" src="src/js/view.js"></script>
+
+
+</head>
+
+<body>
+<div class="content" align="center">
+    <div class="todo-header">
+        <h1 class="main-title1" align="Left" aria-label="todo0"> <!-- fontcolor="#ff0000" -->
+            Todo
+        </h1>
+
+        <h3 class="main-title2" align="center" aria-label="todo1"> <!--font color="#ffff00"-->
+            Todo
+        </h3>
+
+        <h5 class="main-title3" align="right" aria-label="todo2"> <!--font color="#00ffff"-->
+            Todo-Todo-Todo...
+        </h5>
+    </div>
+
+    <div class="mainBody __empty" role="main" >
+        <div class = "addAndSelect">
+            <div class="selector">
+                <button class="selectAll" aria-label="selectAllTodoItems" onclick="selectAll()"></button>
+            </div>
+            <div class="adder">
+                <input class="addString" type="text" onkeypress="return addItem(event)" placeholder="What needs to be done?" aria-label="addTodoItems"/>
+            </div>
+            <div class="todoListBottomborder"></div>
+        </div>
+
+        <div class="todoList">
+        </div>
+
+        <div class="todoBottom">
+            <div class="todoBottom_leftItems" aria-label="Undone items">
+                0 items left
+            </div>
+
+            <div class="todoBottom_itemFilter" aria-label="Todo filter">
+
+                <button class="todoBottomFilter_allItems __active" name="itemFilter_All" aria-label="All" onclick="filterAll()"> All</button>
+                <button class="todoBottomFilter_activeItems" name="itemFilter_Active" aria-label="Active" onclick="filterActive()"> Active</button>
+                <button class="todoBottomFilter_CompletedItems" name="itemFilter_Completed" aria-label="Completed" onclick="filterCompleted()"> Completed</button>
+
+            </div>
+
+            <button class="todoBottom_clearDone" aria-label="clearDone" onclick="clearCompleted()">
+                Clear done
+            </button>
+
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

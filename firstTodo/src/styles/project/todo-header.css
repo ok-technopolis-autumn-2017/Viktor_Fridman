@@ -1,0 +1,20 @@
+    .main-title1 {
+        font-size: 86px;
+        font-weight: 100;
+        color: rgba(175, 47, 47, .15);
+        text-align: center;
+    }
+
+    .main-title2 {
+        font-size: 56px;
+        font-weight: 200;
+        color: rgba(55, 49, 49, .16);
+        text-align: center;
+    }
+
+    .main-title3 {
+        font-size: 28px;
+        font-weight: lighter;
+        color: rgba(175, 52, 777, .17);
+        text-align: center;
+    }

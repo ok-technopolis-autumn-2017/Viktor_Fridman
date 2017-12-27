@@ -1,0 +1,102 @@
+.todoBottom{
+    display: flex;
+    height: 40px;
+    border-top: 1px solid rgb(230,230,230);
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.todoBottom_leftItems{
+    position: relative;
+    display: block;
+    float: left;
+    color: rgb(136,136,136);
+    padding: 1px 0px 1px 0px;
+    top: 50%;
+    margin-top: -8px;
+    margin-left: 12px;
+}
+
+.todoBottom_itemFilter{
+    position: relative;
+    display: flex;
+    height: auto;
+    width: 200px;
+    top: 50%;
+    margin: 0 auto;
+    margin-top: -10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.todoBottomFilter_allItems{
+    display: flex;
+    float: left;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 10%;
+    color: rgb(136,136,136);
+    cursor: pointer;
+}
+
+.todoBottomFilter_activeItems{
+    display: flex;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 10%;
+    color: rgb(136,136,136);
+    horiz-align: center;
+    cursor: pointer;
+}
+
+.todoBottomFilter_CompletedItems{
+    display: flex;
+    float: right;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 10%;
+    color: rgb(136,136,136);
+    cursor: pointer;
+}
+
+.todos-actionbar_filter-all:focus{
+    border: 1px solid rgb(235,223,223);
+}
+
+.todos-actionbar_filter-active:focus{
+    border: 1px solid rgb(235,223,223);
+}
+
+.todos-actionbar_filter-ready:focus{
+    border: 1px solid rgb(235,223,223);
+}
+
+.todoBottom_clearDone{
+    position: relative;
+    display: flex;
+    float: right;
+    background: none;
+    border: 1px solid #fff;
+    border-radius: 10%;
+    color: rgb(136,136,136);
+    padding: 1px 0px 1px 0px;
+    top: 50%;
+    margin-top: -10px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+
+.__active{
+	border: 1px solid rgb(235,223,223);
+}
+
+.__one-element .todoBottom_leftItems{
+    visibility: hidden;
+}
+
+.__one-element .todoBottom_clearDone{
+    visibility: hidden;
+}

@@ -1,0 +1,10 @@
+.__empty .todoList,
+.__empty .todoBottom
+{
+    display: none;
+}
+
+.__empty:before,
+.__empty:after{
+    display: none;
+}

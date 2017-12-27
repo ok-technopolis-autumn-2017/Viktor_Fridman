@@ -1,0 +1,122 @@
+.todoListItem
+.todoListItem __ready{
+    height: auto;
+    border-top: 1px solid rgb(230,230,230);
+    display: flex;
+
+}
+
+.todoListItemCheck-w{
+    float: left;
+    display: flex;
+    height: 64px;
+    width: 64px;
+    position: relative;
+}
+
+.todoListItemCheck,
+.todoListItemCheck_ready{
+    opacity: 0;
+    position: absolute;
+    border: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.todoListItemCheck:checked ~ .todoListItemCheck_icon,
+.todoListItemCheck_ready:checked ~ .todoListItemCheck_ready_icon{
+    background: url(../../images/icons/completed.png) no-repeat center;
+    border: 1px solid rgb(150,215,203);
+}
+
+
+.todoListItemCheck_icon,
+.todoListItemCheck_ready_icon{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+    z-index: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid rgb(235,235,235);
+    background: #fffffe; <!-- МУХАХАХАХАА -->
+    -webkit-appearance: none;
+}
+
+
+.todoListItemName,
+.todoListItemName_ready{
+    width: 100%;
+    display: flex;
+
+    position: relative ;
+    height: 64px;
+    padding: 17px 0px;
+    background: none;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    color: rgb(102,102,102);
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 100;
+    cursor: pointer;
+    resize: none;
+}
+
+.__ready, .todoListItemName_ready{
+    text-decoration: line-through;
+    color: rgb(221,221,221);
+}
+
+.todoListItemDelete-w{
+    right:0%;
+    float: right;
+    height: 64px;
+    width: 44px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    opacity: 0;
+    }
+
+.todoListItemDelete{
+    height: 64px;
+    width: 44px;
+    position: relative;
+    float: right;
+    background: url("../../images/icons/close.png") no-repeat center;
+    border: none;
+    cursor: pointer;
+}
+
+.todos-list-item_check-w:hover ~ .todoListItemDelete-w{
+    opacity: 1;
+}
+
+.todoListItemName_ready:hover + .todoListItemDelete-w{
+    opacity: 1;
+}
+
+.todoListItemName:hover + .todoListItemDelete-w{
+    opacity: 1;
+}
+
+.todoListItemDelete-w:hover{
+    opacity: 1;
+}
+
+.todoListItem:hover{
+    background-color: rgb(250,250,250);
+    cursor: pointer;
+}
