@@ -7,6 +7,11 @@
     </title>
 
     <link rel="stylesheet" href="src/styles/default.css">
+    <script type="text/javascript" src="src/js/controller.js"></script>
+    <script type="text/javascript" src="src/js/model.js"></script>
+    <script type="text/javascript" src="src/js/view.js"></script>
+
+
 </head>
 
 <body>
@@ -28,17 +33,15 @@
     <div class="mainBody __empty" role="main" >
         <div class = "addAndSelect">
             <div class="selector">
-                <button class="selectAll" aria-label="selectAllTodoItems">
-                    <img  alt="Select all" src="src/images/icons/select-all.png"/>
-                </button>
+                <button class="selectAll" aria-label="selectAllTodoItems" onclick="selectAll()"></button>
             </div>
             <div class="adder">
                 <input class="addString" type="text" onkeypress="return addItem(event)" placeholder="What needs to be done?" aria-label="addTodoItems"/>
             </div>
+            <div class="todoListBottomborder"></div>
         </div>
 
         <div class="todoList">
-            <div class="todoListBottomborder"></div>
         </div>
 
         <div class="todoBottom">
