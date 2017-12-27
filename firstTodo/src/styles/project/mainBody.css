@@ -1,11 +1,11 @@
-.todos-container{
+.mainBody{
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
   position: relative;
 }
 
-.todos-container:before,
-.todos-container:after{
+.mainBody:before,
+.mainBody:after{
   content: '';
   position: absolute;
   top: 100%;
@@ -14,13 +14,13 @@
   z-index: -1;
 }
 
-.todos-container:before{
+.mainBody:before{
   height: 10px;
   left: 4px;
   right:4px;
 }
 
-.todos-container:after{
+.mainBody:after{
   height: 5px;
   left: 2px;
   right:2px;

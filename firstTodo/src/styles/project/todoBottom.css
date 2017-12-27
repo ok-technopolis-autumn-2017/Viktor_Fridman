@@ -1,4 +1,4 @@
-.todos-actionbar{
+.todoBottom{
     display: flex;
     height: 40px;
     border-top: 1px solid rgb(230,230,230);
@@ -7,7 +7,7 @@
     justify-content: space-between;
 }
 
-.todos-actionbar_counter{
+.todoBottom_leftItems{
     position: relative;
     display: block;
     float: left;
@@ -18,7 +18,7 @@
     margin-left: 12px;
 }
 
-.todos-actionbar_filter{
+.todoBottom_itemFilter{
     position: relative;
     display: flex;
     height: auto;
@@ -31,7 +31,7 @@
     align-items: flex-start;
 }
 
-.todos-actionbar_filter-all{
+.todoBottomFilter_allItems{
     display: flex;
     float: left;
     background: none;
@@ -41,7 +41,7 @@
     cursor: pointer;
 }
 
-.todos-actionbar_filter-active{
+.todoBottomFilter_activeItems{
     display: flex;
     background: none;
     border: 1px solid #fff;
@@ -51,7 +51,7 @@
     cursor: pointer;
 }
 
-.todos-actionbar_filter-ready{
+.todoBottomFilter_CompletedItems{
     display: flex;
     float: right;
     background: none;
@@ -73,7 +73,7 @@
     border: 1px solid rgb(235,223,223);
 }
 
-.todos-actionbar_delete-ready{
+.todoBottom_clearDone{
     position: relative;
     display: flex;
     float: right;
@@ -93,10 +93,10 @@
 	border: 1px solid rgb(235,223,223);
 }
 
-.__one-element .todos-actionbar_counter{
+.__one-element .todoBottom_leftItems{
     visibility: hidden;
 }
 
-.__one-element .todos-actionbar_delete-ready{
+.__one-element .todoBottom_clearDone{
     visibility: hidden;
 }

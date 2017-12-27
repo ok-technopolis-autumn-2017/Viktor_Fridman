@@ -2,13 +2,11 @@
 
 @import "base.css";
 
-@import "project/todo-title1.css";
-@import "project/todo-title2.css";
-@import "project/todo-title3.css";
-@import "project/todos-container.css";
-@import "project/todos-add.css";
-@import "project/todos-list.css";
+@import "project/todo-header.css";
+@import "project/mainBody.css";
+@import "project/addAndSelect.css";
+@import "project/todoList.css";
 @import "project/todos-list-item.css";
-@import "project/todos-list-bottomborder.css";
-@import "project/todos-actions-bar.css";
+@import "project/todoListBottomborder.css";
+@import "project/todoBottom.css";
 @import "project/todos-empty.css";

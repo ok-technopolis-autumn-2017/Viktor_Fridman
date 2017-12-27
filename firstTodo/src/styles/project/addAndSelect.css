@@ -1,15 +1,15 @@
-.todos-add{
+.addAndSelect{
   height: 64px;
 }
 
-.todo-add_select-all-w{
+.selector{
   width: 64px;
   height: 64px;
   display: inline-block;
   float: left;
 }
 
-.todo-add_select-all{
+.selectAll{
   width: 100%;
   height: 100%;
   background:url(../../images/icons/select-all.png) 0 no-repeat ;
@@ -32,11 +32,11 @@
   margin: -6px -12px;
 }
 
-.todo-add_put-item-w{
+.adder{
   overflow: hidden;
 }
 
-.todo-add_put-item{
+.addString{
   height: 64px;
   width: 100%;
   border: 0;
@@ -50,7 +50,7 @@
   box-sizing: border-box;
 }
 
-.todo-add_put-item::placeholder{
+.addString::placeholder{
   font-style: italic;
   color: #ccc;
 }

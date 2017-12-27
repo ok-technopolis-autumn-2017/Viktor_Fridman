@@ -26,85 +26,38 @@
     </div>
 
     <div class="mainBody" role="main" >
-        <div class = "addString">
-            <button class="selectAll" aria-label="selectAllTodoItems">
-                <img  alt="Select all" src="src/images/icons/select-all.png"/>
-            </button>
-            <input class="adder" placeholder="What needs to be done?" aria-label="addTodoItems">
+        <div class = "addAndSelect">
+            <div class="selector">
+                <button class="selectAll" aria-label="selectAllTodoItems">
+                    <img  alt="Select all" src="src/images/icons/select-all.png"/>
+                </button>
+            </div>
+            <div class="adder">
+                <input class="addString" type="text" onkeypress="return addItem(event)" placeholder="What needs to be done?" aria-label="addTodoItems"/>
+            </div>
         </div>
 
         <div class="todoList">
-            <div class = "todoItem1" aria-label="HTML">
-                <div class="todoItem" role="button">
-                    <button aria-label="completed-todo">
-                        <img  alt="Completed" src="src/images/icons/completed.png">
-                    </button>
-
-                    <textarea class="itemName">HTML</textarea>
-
-                    <button class="todoClose" aria-label="close item">
-                        <img  alt="Close" src="src/images/icons/close.png">
-                    </button>
-                </div>
-            </div>
-
-            <div class = "todoItem2" aria-label="JS">
-                <div class="todoItem" role="button">
-                    <button aria-label="completed-todo">
-                        <img  alt="Completed" src="src/images/icons/completed.png">
-                    </button>
-
-                    <textarea class="itemName">JS</textarea>
-
-                    <button class="todoClose" aria-label="close item">
-                        <img  alt="Close" src="src/images/icons/close.png">
-                    </button>
-                </div>
-            </div>
-
-            <div class = "todoItem3" aria-label="CSS">
-                <div class="todoItem" role="button">
-                    <button aria-label="completed-todo">
-                        <img  alt="Completed" src="src/images/icons/completed.png">
-                    </button>
-
-                    <textarea class="itemName">CSS</textarea>
-
-                    <button class="todoClose" aria-label="close item">
-                        <img  alt="Close" src="src/images/icons/close.png">
-                    </button>
-                </div>
-            </div>
-
-            <div class = "todoItem4" aria-label="JS-tools">
-                <div class="todoItem" role="button">
-                    <button aria-label="completed-todo">
-                        <img  alt="Completed" src="src/images/icons/completed.png">
-                    </button>
-
-                    <textarea class="itemName">JS-tools</textarea>
-
-                    <button class="todoClose" aria-label="close item">
-                        <img  alt="Close" src="src/images/icons/close.png">
-                    </button>
-                </div>
-            </div>
+            <div class="todoListBottomborder"></div>
         </div>
 
         <div class="todoBottom">
             <div class="todoBottom_leftItems" aria-label="Undone items">
-                3 items left
+                0 items left
             </div>
+
             <div class="todoBottom_itemFilter" aria-label="Todo filter">
-                <input type="radio" name="items-filter" aria-label="All"> All
-                <input type="radio" name="items-filter" aria-label="Active"> Active
-                <input type="radio" name="items-filter" aria-label="Completed"> Completed
+
+                <button class="todoBottomFilter_allItems __active" name="itemFilter_All" aria-label="All" onclick="filterAll()"> All</button>
+                <button class="todoBottomFilter_activeItems" name="itemFilter_Active" aria-label="Active" onclick="filterActive()"> Active</button>
+                <button class="todoBottomFilter_CompletedItems" name="itemFilter_Completed" aria-label="Completed" onclick="filterCompleted()"> Completed</button>
+
             </div>
-            <div class="todoBottom_clearDone">
-                <button aria-label="clearDone">
-                    Clear done
-                </button>
-            </div>
+
+            <button class="todoBottom_clearDone" aria-label="clearDone" onclick="clearCompleted()">
+                Clear done
+            </button>
+
         </div>
 
     </div>
