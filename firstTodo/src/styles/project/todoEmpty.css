@@ -1,5 +1,5 @@
-.__empty .todos-list,
-.__empty .todos-actionbar
+.__empty .todoList,
+.__empty .todoBottom
 {
     display: none;
 }
