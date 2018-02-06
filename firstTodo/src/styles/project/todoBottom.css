@@ -1,4 +1,4 @@
-.todoBottom{
+.todo-Bottom{
     display: flex;
     height: 40px;
     border-top: 1px solid rgb(230,230,230);
@@ -7,7 +7,7 @@
     justify-content: space-between;
 }
 
-.todoBottom_leftItems{
+.todo-Bottom-left-Items{
     position: relative;
     display: block;
     float: left;
@@ -18,7 +18,7 @@
     margin-left: 12px;
 }
 
-.todoBottom_itemFilter{
+.todo-Bottom-item-Filter{
     position: relative;
     display: flex;
     height: auto;
@@ -31,7 +31,7 @@
     align-items: flex-start;
 }
 
-.todoBottomFilter_allItems{
+.todo-Bottom-Filter-all-Items{
     display: flex;
     float: left;
     background: none;
@@ -41,7 +41,7 @@
     cursor: pointer;
 }
 
-.todoBottomFilter_activeItems{
+.todo-Bottom-Filter-active-Items{
     display: flex;
     background: none;
     border: 1px solid #fff;
@@ -51,7 +51,7 @@
     cursor: pointer;
 }
 
-.todoBottomFilter_CompletedItems{
+.todo-Bottom-Filter-Completed-Items{
     display: flex;
     float: right;
     background: none;
@@ -73,7 +73,7 @@
     border: 1px solid rgb(235,223,223);
 }
 
-.todoBottom_clearDone{
+.todo-Bottom-clear-Done{
     position: relative;
     display: flex;
     float: right;
@@ -93,10 +93,10 @@
 	border: 1px solid rgb(235,223,223);
 }
 
-.__one-element .todoBottom_leftItems{
+.__one-element .todo-Bottom-left-Items{
     visibility: hidden;
 }
 
-.__one-element .todoBottom_clearDone{
+.__one-element .todo-Bottom-clear-Done{
     visibility: hidden;
 }

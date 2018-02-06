@@ -1,6 +1,6 @@
 function addItem(event){
     if(event.keyCode === 13) {
-        var inputForm = document.getElementsByClassName("addString");
+        var inputForm = document.getElementsByClassName("add-String");
         createTodo(inputForm[0]);
     }
 }

@@ -1,6 +1,6 @@
-var mainBody = document.getElementsByClassName('mainBody');
-var todoList = document.getElementsByClassName('todoList');
-var todoBottom = document.getElementsByClassName('todoBottom');
+var mainBody = document.getElementsByClassName('main-Body');
+var todoList = document.getElementsByClassName('todo-List');
+var todoBottom = document.getElementsByClassName('todo-Bottom');
 
 if (todoList !== 'undefined'){
     console.log("TodoList is ready");

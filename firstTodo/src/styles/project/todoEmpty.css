@@ -1,5 +1,5 @@
-.__empty .todoList,
-.__empty .todoBottom
+.__empty .todo-List,
+.__empty .todo-Bottom
 {
     display: none;
 }
