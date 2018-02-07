@@ -34,3 +34,4 @@ function clearCompleted() {
     console.log('Remove completed items');
     removeCompletedItems();
 }
+

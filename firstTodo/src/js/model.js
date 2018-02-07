@@ -1,4 +1,6 @@
-todoItemsList = Array.from(document.getElementsByClassName('todoListItem'));
+
+
+    todoItemsList = Array.from(document.getElementsByClassName('todoListItem'));
 console.log(todoItemsList);
 console.log(typeof todoItemsList);
 
@@ -7,7 +9,7 @@ var idCounter = 0;
 var isEmpty = true;
 var currentFilter = 'all';
 
-function createTodo(input){
+    function createTodo(input) {
     if (input.value.length === 0) return;
     itemsCounter++;
     idCounter++;
@@ -37,24 +39,24 @@ function createTodo(input){
     resetInputForm(input);
 }
 
-function generateCheckBox(ctx) {
+     function generateCheckBox(ctx) {
     ctx.setAttribute('class', 'todoListItemCheck-w');
     ctx.innerHTML =
         '<input class="todoListItemCheck" id=' + idCounter + ' type="checkbox" onclick="selectItem(this.id)" aria-label="set as done">\n\n' +
         '<div class="todoListItemCheck_icon"></div>\n\n';
 }
 
-function generateDeleteButton(ctx) {
+ function generateDeleteButton(ctx) {
     ctx.setAttribute('class', 'todoListItemDelete-w');
     ctx.innerHTML =
         '<button class="todoListItemDelete" id=' + idCounter + ' type="" onclick="deleteClick(this.id)" aria-label="delete item"></button>\n\n';
 }
 
-function deleteItem(id) {
+ function deleteItem(id) {
     console.log('deleting item');
     var delItem = document.getElementById(id);
     console.log();
-    for(var i = 0, len = todoItemsList.length; i < len; i++){
+    for (var i = 0, len = todoItemsList.length; i < len; i++) {
         if (todoItemsList[i].getAttribute('id') === delItem.getAttribute("id")) {
             itemsCounter--;
             removeItemFromView(todoItemsList[i]);
@@ -64,40 +66,41 @@ function deleteItem(id) {
     }
 }
 
-function setSelectedToItem(id) {
+    function setSelectedToItem(id) {
     console.log('selecting item');
     var item = document.getElementById(id);
-    for(var i = 0, len = todoItemsList.length; i < len; i++) {
-        if (todoItemsList[i].getAttribute('id') === id){
+    for (var i = 0, len = todoItemsList.length; i < len; i++) {
+        if (todoItemsList[i].getAttribute('id') === id) {
             pushSelectedToItem(todoItemsList[i]);
         }
     }
 }
 
-function setSelectedToAll() {
+ function setSelectedToAll() {
     if (itemsCounter === 0) {
         return;
     }
     console.log('selecting all');
-    for(var i = 0, len = todoItemsList.length; i < len; i++){
+    for (var i = 0, len = todoItemsList.length; i < len; i++) {
         pushSelectorToItem(document.getElementById(todoItemsList[i].getAttribute('id')), 'todoListItem __ready');
     }
 }
 
-function removeCompletedItems(){
+    function removeCompletedItems() {
     if (itemsCounter === 0) return;
-    for(var i = 0, len = todoItemsList.length; i < len; i++){
-        if (todoItemsList[i].getAttribute('class') === 'todoListItem __ready'){
+    for (var i = 0, len = todoItemsList.length; i < len; i++) {
+        if (todoItemsList[i].getAttribute('class') === 'todoListItem __ready') {
             itemsCounter--;
             console.log(document.getElementById(todoItemsList[i].getAttribute('id')));
             removeItemFromView(document.getElementById(todoItemsList[i].getAttribute('id')));
             todoItemsList.splice(i, 1);
-            i--; len--;
+            i--;
+            len--;
         }
     }
 }
 
-function setFilter(filter) {
+ function setFilter(filter) {
     currentFilter = filter;
     changeViewByFilter(filter);
 }

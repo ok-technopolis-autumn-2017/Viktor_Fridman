@@ -33,10 +33,24 @@
     <div class="main-Body __empty" role="main" >
         <div class = "add-And-Select">
             <div class="selector">
-                <button class="select-All" aria-label="selectAllTodoItems" onclick="selectAll()"></button>
+
+                <button class="select-All" aria-label="selectAllTodoItems"></button>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var selectElement = document.getElementsByClassName('select-All')[0];
+                        selectElement.addEventListener('click', function () {
+                            selectAll();
+                        });
+                    });
+                </script>
             </div>
             <div class="adder">
-                <input class="add-String" type="text" onkeypress="return addItem(event)" placeholder="What needs to be done?" aria-label="addTodoItems"/>
+                <input class="add-String" type="text" onkeypress="myFunction()" placeholder="What needs to be done?" aria-label="addTodoItems"/>
+                <script>
+                    function myFunction() {
+                            return addItem(event);
+                    }
+                </script>
             </div>
             <div class="todo-List-Bottomborder"></div>
         </div>
@@ -51,15 +65,46 @@
 
             <div class="todo-Bottom-item-Filter" aria-label="Todo filter">
 
-                <button class="todo-Bottom-Filter-all-Items __active" name="itemFilter_All" aria-label="All" onclick="filterAll()"> All</button>
-                <button class="todo-Bottom-Filter-active-Items" name="itemFilter_Active" aria-label="Active" onclick="filterActive()"> Active</button>
-                <button class="todo-Bottom-Filter-Completed-Items" name="itemFilter_Completed" aria-label="Completed" onclick="filterCompleted()"> Completed</button>
+                <button class="todo-Bottom-Filter-all-Items __active" name="itemFilter_All" aria-label="All"> All</button>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var filterAllElement = document.getElementsByClassName('todo-Bottom-Filter-all-Items')[0];
+                        filterAllElement.addEventListener('click', function () {
+                            filterAll();
+                        });
+                    });
+                </script>
 
+                <button class="todo-Bottom-Filter-active-Items" name="itemFilter_Active" aria-label="Active"> Active</button>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var filterActiveElement = document.getElementsByClassName('todo-Bottom-Filter-active-Items')[0];
+                        filterActiveElement.addEventListener('click', function () {
+                            filterActive();
+                        });
+                    });
+                </script>
+
+                <button class="todo-Bottom-Filter-Completed-Items" name="itemFilter_Completed" aria-label="Completed"> Completed</button>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var filterCompletedElement = document.getElementsByClassName('todo-Bottom-Filter-Completed-Items')[0];
+                        filterCompletedElement.addEventListener('click', function () {
+                            filterCompleted();
+                        });
+                    });
+                </script>
             </div>
 
-            <button class="todo-Bottom-clear-Done" aria-label="clearDone" onclick="clearCompleted()">
-                Clear done
-            </button>
+            <button class="todo-Bottom-clear-Done" aria-label="clearDone">Clear done</button>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var clearCompletedElement = document.getElementsByClassName('todo-Bottom-clear-Done')[0];
+                    clearCompletedElement.addEventListener('click', function () {
+                        clearCompleted();
+                    });
+                });
+            </script>
 
         </div>
 
