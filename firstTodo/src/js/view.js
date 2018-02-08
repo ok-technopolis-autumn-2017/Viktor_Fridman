@@ -2,10 +2,6 @@ var mainBody = document.getElementsByClassName('main-Body');
 var todoList = document.getElementsByClassName('todo-List');
 var todoBottom = document.getElementsByClassName('todo-Bottom');
 
-if (todoList !== 'undefined'){
-    console.log("TodoList is ready");
-}
-
 function resetInputForm(form) {
     form.value = '';
 }
@@ -48,10 +44,9 @@ function pushSelectorToItem(item, itemClass) {
 }
 
 function changeViewByFilter(filter) {
-    console.log(todoBottom[0].childNodes[3].childNodes[1]);
+    // console.log(todoBottom[0].childNodes[3].childNodes[1]);
     var len, i;
     if (filter === 'all') {
-        console.log('just showing all');
         todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems __active');
         todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems');
         todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems');
@@ -61,7 +56,6 @@ function changeViewByFilter(filter) {
         }
     }
     if (filter === 'active') {
-        console.log('showing active items');
         todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems');
         todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems __active');
         todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems');
@@ -76,7 +70,6 @@ function changeViewByFilter(filter) {
         }
     }
     if (filter === 'completed') {
-        console.log('showing completed items');
         todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems');
         todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems');
         todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems __active');

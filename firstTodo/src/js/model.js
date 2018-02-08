@@ -1,9 +1,6 @@
 
 
     todoItemsList = Array.from(document.getElementsByClassName('todoListItem'));
-console.log(todoItemsList);
-console.log(typeof todoItemsList);
-
 var itemsCounter = 0;
 var idCounter = 0;
 var isEmpty = true;
@@ -34,7 +31,6 @@ var currentFilter = 'all';
 
     todoItemsList.push(todoItem);
 
-    console.log('Adding element ' + input.value);
     pushItemToView(todoItem);
     resetInputForm(input);
 }
@@ -53,9 +49,7 @@ var currentFilter = 'all';
 }
 
  function deleteItem(id) {
-    console.log('deleting item');
     var delItem = document.getElementById(id);
-    console.log();
     for (var i = 0, len = todoItemsList.length; i < len; i++) {
         if (todoItemsList[i].getAttribute('id') === delItem.getAttribute("id")) {
             itemsCounter--;
@@ -67,8 +61,6 @@ var currentFilter = 'all';
 }
 
     function setSelectedToItem(id) {
-    console.log('selecting item');
-    var item = document.getElementById(id);
     for (var i = 0, len = todoItemsList.length; i < len; i++) {
         if (todoItemsList[i].getAttribute('id') === id) {
             pushSelectedToItem(todoItemsList[i]);
@@ -80,7 +72,6 @@ var currentFilter = 'all';
     if (itemsCounter === 0) {
         return;
     }
-    console.log('selecting all');
     for (var i = 0, len = todoItemsList.length; i < len; i++) {
         pushSelectorToItem(document.getElementById(todoItemsList[i].getAttribute('id')), 'todoListItem __ready');
     }
@@ -91,7 +82,7 @@ var currentFilter = 'all';
     for (var i = 0, len = todoItemsList.length; i < len; i++) {
         if (todoItemsList[i].getAttribute('class') === 'todoListItem __ready') {
             itemsCounter--;
-            console.log(document.getElementById(todoItemsList[i].getAttribute('id')));
+            // console.log(document.getElementById(todoItemsList[i].getAttribute('id')));
             removeItemFromView(document.getElementById(todoItemsList[i].getAttribute('id')));
             todoItemsList.splice(i, 1);
             i--;

@@ -6,7 +6,6 @@ function addItem(event){
 }
 
 function selectItem(id) {
-    console.log('Selecting item');
     setSelectedToItem(id);
 }
 
@@ -31,7 +30,6 @@ function filterCompleted() {
 }
 
 function clearCompleted() {
-    console.log('Remove completed items');
     removeCompletedItems();
 }
 
