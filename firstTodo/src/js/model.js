@@ -42,7 +42,7 @@ var globalVars = require('firstTodo/src/js/GlobalVars');
         '<button class="todoListItemDelete" id=' + globalVars.idCounter + ' type="" onclick="deleteClick(this.id)" aria-label="delete item"></button>\n\n';
 }
 
- function deleteItem(id) {
+ function   deleteItem(id) {
      var delItem = document.getElementById(id);
     for (var i = 0, len = globalVars.todoItemsList.length; i < len; i++) {
         if (globalVars.todoItemsList[i].getAttribute('id') === delItem.getAttribute("id")) {

@@ -27,7 +27,7 @@
 
 .todoListItemCheck:checked ~ .todoListItemCheck_icon,
 .todoListItemCheck_ready:checked ~ .todoListItemCheck_ready_icon{
-    background: url(../../images/icons/completed.png) no-repeat center;
+    background: url(../../public/images/icons/completed.png) no-repeat center;
     border: 1px solid rgb(150,215,203);
 }
 
@@ -92,7 +92,7 @@
     width: 44px;
     position: relative;
     float: right;
-    background: url("../../images/icons/close.png") no-repeat center;
+    background: url("../../public/images/icons/close.png") no-repeat center;
     border: none;
     cursor: pointer;
 }
