@@ -25,3 +25,4 @@ function filterCompleted() {
 function clearCompleted() {
     removeCompletedItems();
 }
+

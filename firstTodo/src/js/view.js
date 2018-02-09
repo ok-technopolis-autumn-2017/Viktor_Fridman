@@ -1,25 +1,27 @@
+var globalVars = require('firstTodo/src/js/GlobalVars');
+
 function resetInputForm(form) {
     form.value = '';
 }
 
 function pushItemToView(newTodoItem) {
-    todoList[0].insertBefore(newTodoItem, todoList[0].firstChild.nextSibling);
-    if (isEmpty) {
-        mainBody[0].setAttribute('class','mainBody');
-        isEmpty = false;
+    globalVars.todoList[0].insertBefore(newTodoItem, globalVars.todoList[0].firstChild.nextSibling);
+    if (globalVars.isEmpty) {
+        globalVars.mainBody[0].setAttribute('class','mainBody');
+        globalVars.isEmpty = false;
     }
-    todoBottom[0].childNodes[1].childNodes[0].data = itemsCounter + ' items left';
+    globalVars.todoBottom[0].childNodes[1].childNodes[0].data = globalVars.itemsCounter + ' items left';
     changeViewByFilter(currentFilter);
 }
 
 function removeItemFromView(itemToDelete) {
-    todoList[0].removeChild(itemToDelete);
-    if (itemsCounter === 0) {
-        mainBody[0].setAttribute('class', mainBody[0].getAttribute('class') + ' __empty');
-        isEmpty = true;
-        currentFilter = 'all';
+    globalVars.todoList[0].removeChild(itemToDelete);
+    if (globalVars.itemsCounter === 0) {
+        globalVars.mainBody[0].setAttribute('class', globalVars.mainBody[0].getAttribute('class') + ' __empty');
+        globalVars.isEmpty = true;
+        globalVars.currentFilter = 'all';
     }
-    todoBottom[0].childNodes[1].childNodes[0].data = itemsCounter + ' items left';
+    globalVars.todoBottom[0].childNodes[1].childNodes[0].data = globalVars.itemsCounter + ' items left';
 }
 
 function pushSelectedToItem(item) {
@@ -40,41 +42,40 @@ function pushSelectorToItem(item, itemClass) {
 }
 
 function changeViewByFilter(filter) {
-    // console.log(todoBottom[0].childNodes[3].childNodes[1]);
     var len, i;
     if (filter === 'all') {
-        todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems __active');
-        todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems');
-        todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems');
-        len = todoItemsList.length;
+        globalVars.todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems __active');
+        globalVars.todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems');
+        globalVars.todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems');
+        len = globalVars.todoItemsList.length;
         for (i = 0; i < len; i++) {
-            todoItemsList[i].style.display = 'flex';
+            globalVars.todoItemsList[i].style.display = 'flex';
         }
     }
     if (filter === 'active') {
-        todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems');
-        todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems __active');
-        todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems');
-        len = todoItemsList.length;
+        globalVars.todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems');
+        globalVars.todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems __active');
+        globalVars.todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems');
+        len = globalVars.todoItemsList.length;
         for (i = 0; i < len; i++) {
-            if (todoItemsList[i].getAttribute('class') === 'todoListItem __ready') {
-                todoItemsList[i].style.display = 'none';
+            if (globalVars.todoItemsList[i].getAttribute('class') === 'todoListItem __ready') {
+                globalVars.todoItemsList[i].style.display = 'none';
             } else {
-                todoItemsList[i].style.display = 'flex';
+                globalVars.todoItemsList[i].style.display = 'flex';
             }
 
         }
     }
     if (filter === 'completed') {
-        todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems');
-        todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems');
-        todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems __active');
-        len = todoItemsList.length;
+        globalVars.todoBottom[0].childNodes[3].childNodes[1].setAttribute('class', 'todoBottomFilter_allItems');
+        globalVars.todoBottom[0].childNodes[3].childNodes[3].setAttribute('class', 'todoBottomFilter_activeItems');
+        globalVars.todoBottom[0].childNodes[3].childNodes[5].setAttribute('class', 'todoBottomFilter_CompletedItems __active');
+        len = globalVars.todoItemsList.length;
         for (i = 0; i < len; i++) {
-            if (todoItemsList[i].getAttribute('class') === 'todoListItem __ready') {
-                todoItemsList[i].style.display = 'flex';
+            if (globalVars.todoItemsList[i].getAttribute('class') === 'todoListItem __ready') {
+                globalVars.todoItemsList[i].style.display = 'flex';
             } else {
-                todoItemsList[i].style.display = 'none';
+                globalVars.todoItemsList[i].style.display = 'none';
             }
         }
     }
