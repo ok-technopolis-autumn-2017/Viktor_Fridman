@@ -32,7 +32,7 @@
   width: 100%;
   border: 0;
   background: none;
-  color: #666;
+  color: $c-black-light;
   font-size: 24px;
   line-height: 30px;
   font-weight: 200;
@@ -43,6 +43,6 @@
 
 .add-String::placeholder{
   font-style: italic;
-  color: #ccc;
+  color: $c-gray-light-light;
 }
 

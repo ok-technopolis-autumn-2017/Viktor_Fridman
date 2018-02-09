@@ -1,7 +1,7 @@
 @import "../config/globals";
 
 .main-Body{
-  background-color: #fff;
+  background-color: $c-white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
   position: relative;
 }
@@ -11,7 +11,7 @@
   content: '';
   position: absolute;
   top: 100%;
-  background: #fff;
+  background: $c-white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
   z-index: -1;
 }

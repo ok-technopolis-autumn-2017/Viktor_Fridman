@@ -63,7 +63,10 @@
     cursor: pointer;
 }
 
-.todos-actionbar_filter-all:focus, .todos-actionbar_filter-active:focus, .todos-actionbar_filter-ready:focus, .__active{
+.todos-actionbar_filter-all:focus,
+.todos-actionbar_filter-active:focus,
+.todos-actionbar_filter-ready:focus,
+.__active{
     border: 1px solid rgb(235,223,223);
 }
 
@@ -82,6 +85,7 @@
     cursor: pointer;
 }
 
-.__one-element .todo-Bottom-left-Items, .__one-element .todo-Bottom-clear-Done{
+.__one-element .todo-Bottom-left-Items,
+.__one-element .todo-Bottom-clear-Done{
     visibility: hidden;
 }
