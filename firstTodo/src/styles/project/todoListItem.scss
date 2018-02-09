@@ -1,7 +1,7 @@
 @import "../config/globals";
 
 .todoListItem{
-    border-top: 1px solid rgb(230,230,230);
+    border-top: 1px solid $color-border;
     display: flex;
 }
 
@@ -46,8 +46,8 @@
     height: 40px;
     border-radius: 50%;
     vertical-align: middle;
-    border: 1px solid rgb(235,235,235);
-    background: #fffffe; <!-- МУХАХАХАХАА -->
+    border: 1px solid $color-border;
+    background: $c-white;
     -webkit-appearance: none;
 }
 
