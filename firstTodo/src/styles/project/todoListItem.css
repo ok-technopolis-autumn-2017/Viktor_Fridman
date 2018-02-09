@@ -1,8 +1,6 @@
-.todoListItem,
-.todoListItem __ready{
+.todoListItem{
     border-top: 1px solid rgb(230,230,230);
     display: flex;
-
 }
 
 .todoListItemCheck-w{

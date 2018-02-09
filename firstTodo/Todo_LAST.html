@@ -10,6 +10,7 @@
     <script type="text/javascript" src="src/js/controller.js"></script>
     <script type="text/javascript" src="src/js/model.js"></script>
     <script type="text/javascript" src="src/js/view.js"></script>
+    <script type="text/javascript" src="src/js/globalVars.js"></script>
 
 
 </head>
@@ -28,6 +29,7 @@
         <h5 class="main-title3" align="right" aria-label="todo2"> <!--font color="#00ffff"-->
             Todo-Todo-Todo...
         </h5>
+
     </div>
 
     <div class="main-Body __empty" role="main" >
@@ -45,11 +47,15 @@
                 </script>
             </div>
             <div class="adder">
-                <input class="add-String" type="text" onkeypress="myFunction()" placeholder="What needs to be done?" aria-label="addTodoItems"/>
+                <input class="add-String" type="text" placeholder="What needs to be done?" aria-label="addTodoItems" id="addStringTodos">
                 <script>
-                    function myFunction() {
-                            return addItem(event);
-                    }
+                    document.addEventListener('DOMContentLoaded', function () {
+
+                    var addString = document.getElementsByClassName("add-String")[0];
+                    addString.addEventListener('keypress', function() {
+                        addElement(event);
+                    });
+                });
                 </script>
             </div>
             <div class="todo-List-Bottomborder"></div>

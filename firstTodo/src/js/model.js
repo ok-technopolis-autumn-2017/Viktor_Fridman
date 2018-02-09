@@ -1,12 +1,6 @@
 
 
-    todoItemsList = Array.from(document.getElementsByClassName('todoListItem'));
-var itemsCounter = 0;
-var idCounter = 0;
-var isEmpty = true;
-var currentFilter = 'all';
-
-    function createTodo(input) {
+ function createTodo(input) {
     if (input.value.length === 0) return;
     itemsCounter++;
     idCounter++;
@@ -35,7 +29,7 @@ var currentFilter = 'all';
     resetInputForm(input);
 }
 
-     function generateCheckBox(ctx) {
+ function generateCheckBox(ctx) {
     ctx.setAttribute('class', 'todoListItemCheck-w');
     ctx.innerHTML =
         '<input class="todoListItemCheck" id=' + idCounter + ' type="checkbox" onclick="selectItem(this.id)" aria-label="set as done">\n\n' +
@@ -49,7 +43,7 @@ var currentFilter = 'all';
 }
 
  function deleteItem(id) {
-    var delItem = document.getElementById(id);
+     var delItem = document.getElementById(id);
     for (var i = 0, len = todoItemsList.length; i < len; i++) {
         if (todoItemsList[i].getAttribute('id') === delItem.getAttribute("id")) {
             itemsCounter--;
@@ -60,7 +54,7 @@ var currentFilter = 'all';
     }
 }
 
-    function setSelectedToItem(id) {
+function setSelectedToItem(id) {
     for (var i = 0, len = todoItemsList.length; i < len; i++) {
         if (todoItemsList[i].getAttribute('id') === id) {
             pushSelectedToItem(todoItemsList[i]);
@@ -77,7 +71,7 @@ var currentFilter = 'all';
     }
 }
 
-    function removeCompletedItems() {
+function removeCompletedItems() {
     if (itemsCounter === 0) return;
     for (var i = 0, len = todoItemsList.length; i < len; i++) {
         if (todoItemsList[i].getAttribute('class') === 'todoListItem __ready') {

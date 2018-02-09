@@ -1,7 +1,3 @@
-var mainBody = document.getElementsByClassName('main-Body');
-var todoList = document.getElementsByClassName('todo-List');
-var todoBottom = document.getElementsByClassName('todo-Bottom');
-
 function resetInputForm(form) {
     form.value = '';
 }
