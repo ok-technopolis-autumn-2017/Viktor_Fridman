@@ -1,5 +1,13 @@
 var globalVars = require('firstTodo/src/js/GlobalVars');
 
+function addElement(event) {
+    var inputForm = document.getElementsByClassName("add-String")[0];
+    if (event.keyCode===13){
+        console.log("sdfsdfsdfsdfsdf");
+        createTodo(inputForm);
+    }
+}
+
  function createTodo(input) {
     if (input.value.length === 0) return;
     globalVars.itemsCounter++;

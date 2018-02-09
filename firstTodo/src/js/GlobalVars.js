@@ -9,13 +9,6 @@ var GlobalVars = {
     isEmpty: true,
     currentFilter: 'all'
 };
- function addElement(event) {
-     var inputForm = document.getElementsByClassName("add-String")[0];
-     if (event.keyCode===13){
-        console.log("sdfsdfsdfsdfsdf");
-        createTodo(inputForm);
-     }
-}
 
 module.exports = GlobalVars;
 
