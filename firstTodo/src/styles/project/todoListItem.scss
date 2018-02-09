@@ -56,7 +56,6 @@
 .todoListItemName_ready{
     width: 100%;
     display: flex;
-
     position: relative ;
     height: 64px;
     padding: 17px 0px;
@@ -99,18 +98,9 @@
     cursor: pointer;
 }
 
-.todos-list-item_check-w:hover ~ .todoListItemDelete-w{
-    opacity: 1;
-}
-
-.todoListItemName_ready:hover + .todoListItemDelete-w{
-    opacity: 1;
-}
-
-.todoListItemName:hover + .todoListItemDelete-w{
-    opacity: 1;
-}
-
+.todos-list-item_check-w:hover ~ .todoListItemDelete-w,
+.todoListItemName_ready:hover + .todoListItemDelete-w,
+.todoListItemName:hover + .todoListItemDelete-w,
 .todoListItemDelete-w:hover{
     opacity: 1;
 }
