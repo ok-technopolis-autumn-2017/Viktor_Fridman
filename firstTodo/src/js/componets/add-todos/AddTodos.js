@@ -1,7 +1,7 @@
 var Observable = require('../../utils/observer/Observable');
 var ActionsTypes = require('../../constants/ActionsTypes');
 
-var TODOS_ADD_INPUT = ".add-String";
+var TODOS_ADD_INPUT = ".todo-add_input";
 var TODOS_MAKE_ALL_COMPLETED_BUTTON = ".select-All";
 var ENTER_KEY_CODE = 13;
 

@@ -169,7 +169,7 @@ module.exports = Model;
 var Observable = __webpack_require__(0);
 var ActionsTypes = __webpack_require__(1);
 
-var TODOS_ADD_INPUT = ".add-String";
+var TODOS_ADD_INPUT = ".todo-add_input";
 var TODOS_MAKE_ALL_COMPLETED_BUTTON = ".select-All";
 var ENTER_KEY_CODE = 13;
 
