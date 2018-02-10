@@ -1,0 +1,149 @@
+@import "../config/globals";
+
+.todo-item {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #efefef;
+  border-top: 1px solid #efefef;
+}
+
+.todo-item:before,
+.todo-item:after {
+  content: '';
+  display: table;
+}
+
+.todo-item:after {
+  clear: both;
+}
+
+.todo-item:hover {
+  background: #fafafa;
+}
+
+.todo-item_name-w {
+  overflow: hidden;
+  height: 64px;
+}
+
+.todo-item_name {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  background: none;
+  font-size: 24px;
+  color: #666;
+  line-height: 30px;
+  font-weight: 200;
+  padding-right: 12px;
+  margin-top: 18px;
+  outline: none;
+  resize: none;
+  border: none;
+  margin-bottom: 0;
+}
+
+.__done > .todo-item_name-w > .todo-item_name {
+  text-decoration: line-through;
+}
+
+.todo-item_belonging-checkbox {
+  float: left;
+}
+
+.todo-item_delete-w {
+  width: 64px;
+  height: 64px;
+  background: none;
+  border: none;
+  padding: 0;
+  float: right;
+  position: relative;
+  opacity: 1;
+}
+
+.todo-item_delete {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+}
+
+.todo-item_delete-w:hover {
+  filter: brightness(0);
+}
+
+.todo-item:hover .todos-item_delete_icon {
+  width: 24px;
+  height: 24px;
+  background: url("../../public/dist/images/icons/close.png") no-repeat 0 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -6px -12px;
+  opacity: 300;
+}
+
+
+.todos-item_done-mark-w,
+.todos-item_undone-mark-w {
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 12px;
+  border-radius: 4em;
+  position: relative;
+  opacity: 1;
+}
+
+.todos-item_done-mark-w {
+  border: 2px solid #67c5b3;
+  opacity: 1;
+}
+
+.todos-item_undone-mark-w {
+  border: 2px solid #efefef;
+  opacity: 1;
+}
+
+.todos-item_done-mark,
+.todos-item_undone-mark {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  transform: scale(4);
+  opacity: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.todos-item_undone-mark-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: 50%;
+  top: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  opacity: 300;
+}
+
+.todos-item_done-mark-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background: url("../../public/dist/images/icons/completed.png") no-repeat 0 0;
+  left: 50%;
+  top: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  opacity: 300;
+}

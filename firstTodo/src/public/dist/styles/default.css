@@ -110,7 +110,7 @@ body,
 input,
 button,
 textarea,
-h1 {
+h1, h3, h5 {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
 
@@ -239,33 +239,33 @@ body {
     border-top: 1px solid #efefef;
 }
 
-.todos-item {
+.todo-item {
     margin: 0;
     padding: 0;
     border-bottom: 1px solid #efefef;
     border-top: 1px solid #efefef;
 }
 
-.todos-item:before,
-.todos-item:after {
+.todo-item:before,
+.todo-item:after {
     content: '';
     display: table;
 }
 
-.todos-item:after {
+.todo-item:after {
     clear: both;
 }
 
-.todos-item:hover {
+.todo-item:hover {
     background: #fafafa;
 }
 
-.todos-item_name-w {
+.todo-item_name-w {
     overflow: hidden;
     height: 64px;
 }
 
-.todos-item_name {
+.todo-item_name {
     width: 100%;
     overflow: hidden;
     box-sizing: border-box;
@@ -282,15 +282,15 @@ body {
     margin-bottom: 0;
 }
 
-.__done > .todos-item_name-w > .todos-item_name {
+.__done > .todo-item_name-w > .todo-item_name {
     text-decoration: line-through;
 }
 
-.todos-item_belonging-checkbox {
+.todo-item_belonging-checkbox {
     float: left;
 }
 
-.todos-item_delete-w {
+.todo-item_delete-w {
     width: 64px;
     height: 64px;
     background: none;
@@ -301,7 +301,7 @@ body {
     opacity: 1;
 }
 
-.todos-item_delete {
+.todo-item_delete {
     background: none;
     border: none;
     padding: 0;
@@ -313,11 +313,11 @@ body {
     opacity: 0;
 }
 
-.todos-item_delete-w:hover {
+.todo-item_delete-w:hover {
     filter: brightness(0);
 }
 
-.todos-item:hover .todos-item_delete_icon {
+.todo-item:hover .todos-item_delete_icon {
     width: 24px;
     height: 24px;
     background: url("../images/icons/close.png") no-repeat 0 0;
