@@ -27,18 +27,7 @@ form, label,header{
     text-align: center;
 }
 
-.todos-item_done-mark-w{
-    width: 40px;
-    height: 40px;
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 12px;
-    border-radius: 4em;
-    position: relative;
-    opacity: 1;
-}
-
+.todos-item_done-mark-w,
 .todos-item_undone-mark-w {
     width: 40px;
     height: 40px;
@@ -61,17 +50,7 @@ form, label,header{
     opacity: 1;
 }
 
-.todos-item_done-mark{
-    position: absolute;
-    left: 25%;
-    top: 25%;
-    transform: scale(4);
-    opacity: 0;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
+.todos-item_done-mark,
 .todos-item_undone-mark {
     position: absolute;
     left: 25%;
@@ -121,32 +100,16 @@ form, label,header{
     cursor: pointer;
 }
 
-.todo-Bottom-Filter:hover {
-    border: 2px solid #efefef;
-    border-radius: 2px;
-}
-
+.todo-Bottom-Filter:hover,
 .todo-Bottom-Filter:focus {
     border: 2px solid #efefef;
     border-radius: 2px;
 }
 
-body {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-}
-
-input {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-}
-
-button {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-}
-
-textarea {
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-}
-
+body,
+input,
+button,
+textarea,
 h1 {
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
@@ -177,15 +140,7 @@ body {
     margin: 0 20px;
 }
 
-.main-Body:before {
-    content: '';
-    position: absolute;
-    top: 100%;
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    z-index: -1;
-}
-
+.main-Body:before,
 .main-Body:after {
     content: '';
     position: absolute;
@@ -212,11 +167,7 @@ body {
     padding: 0;
 }
 
-.add-And-Select:before {
-    content: '';
-    display: table;
-}
-
+.add-And-Select:before,
 .add-And-Select:after {
     content: '';
     display: table;
@@ -238,11 +189,7 @@ body {
     position: relative;
 }
 
-.select-All:hover {
-    background: #f9f9f9;
-    border: none;
-}
-
+.select-All:hover,
 .select-All:focus {
     background: #f9f9f9;
     border: none;
@@ -299,11 +246,7 @@ body {
     border-top: 1px solid #efefef;
 }
 
-.todos-item:before {
-    content: '';
-    display: table;
-}
-
+.todos-item:before,
 .todos-item:after {
     content: '';
     display: table;
@@ -425,11 +368,7 @@ body {
     outline: none;
 }
 
-.todo-Bottom-clear-Done-button:hover {
-    border: 2px solid #efefef;
-    border-radius: 2px;
-}
-
+.todo-Bottom-clear-Done-button:hover,
 .todo-Bottom-clear-Done-button:focus {
     border: 2px solid #efefef;
     border-radius: 2px;
