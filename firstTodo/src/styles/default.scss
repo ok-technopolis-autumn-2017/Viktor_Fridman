@@ -2,7 +2,7 @@
 
 @import "base";
 
-@import "project/todoHeader";
+@import "project/todoHeaderTitles";
 @import "project/mainBody";
 @import "project/mainWrapper";
 @import "project/addAndSelect";
@@ -11,6 +11,7 @@
 @import "project/todoItme";
 @import "project/todoBottom";
 @import "project/todoBottomFilter";
+@import "project/todoBottomClearDone";
 @import "project/todoEmpty";
 @import "base/todos-checkbox";
 @import "base/todos-filter";
