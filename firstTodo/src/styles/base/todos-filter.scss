@@ -1,4 +1,4 @@
-.todos-filter{
+.todo-Bottom-Filter{
   font-size: $small-text-size;
   color: $c-gray-dark;
   padding: 0;
@@ -14,8 +14,8 @@
 
 }
 
-.todos-filter:hover,
-.todos-filter:focus{
+.todo-Bottom-Filter:hover,
+.todo-Bottom-Filter:focus{
   border: 2px solid $border-color;
   border-radius: 2px;
 }

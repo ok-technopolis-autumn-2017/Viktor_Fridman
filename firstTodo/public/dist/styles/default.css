@@ -77,7 +77,7 @@ form, label,header{
     position: absolute;
     width: 24px;
     height: 24px;
-    background: url("../images/icons/completed.png") no-repeat 0 0;
+    background: url("../../../src/images/icons/completed.png") no-repeat 0 0;
     left: 50%;
     top: 50%;
     margin-left: -10px;
@@ -198,7 +198,7 @@ body {
 .select-All-icon {
     width: 24px;
     height: 12px;
-    background: url("../images/icons/select-all.png") no-repeat 0 0;
+    background: url("../../../src/images/icons/select-all.png") no-repeat 0 0;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -320,7 +320,7 @@ body {
 .todo-item:hover .todos-item_delete_icon {
     width: 24px;
     height: 24px;
-    background: url("../images/icons/close.png") no-repeat 0 0;
+    background: url("../../../src/images/icons/close.png") no-repeat 0 0;
     position: absolute;
     left: 50%;
     top: 50%;

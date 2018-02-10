@@ -1,4 +1,4 @@
-var globalVars = require('firstTodo/src/js/GlobalVars');
+var globalVars = require('firstTodo/src/js/utils/observer/GlobalVars');
 
 function addElement(event) {
     var inputForm = document.getElementsByClassName("add-String")[0];
