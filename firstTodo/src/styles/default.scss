@@ -2,17 +2,17 @@
 
 @import "base";
 
-@import "project/todoHeaderTitles";
-@import "project/mainBody";
-@import "project/mainWrapper";
-@import "project/addAndSelect";
-@import "project/todoListBottomborder";
-@import "project/todoList";
-@import "project/todoItme";
-@import "project/todoBottom";
-@import "project/todoBottomFilter";
-@import "project/todoBottomClearDone";
-@import "project/todoEmpty";
+@import "project/header/todoHeaderTitles";
+@import "project/body/mainBody";
+@import "project/body/mainWrapper";
+@import "project/addAndSelect/addAndSelect";
+@import "project/todoList/todoListBottomborder";
+@import "project/todoList/todoList";
+@import "project/todoList/todoItme";
+@import "project/todoBottom/todoBottom";
+@import "project/todoBottom/todoBottomFilter";
+@import "project/todoBottom/todoBottomClearDone";
+@import "project/todoList/todoEmpty";
 @import "base/todos-checkbox";
 @import "base/todos-filter";
 

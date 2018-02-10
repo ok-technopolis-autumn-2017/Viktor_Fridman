@@ -1,4 +1,4 @@
-@import "../config/globals";
+@import "../../config/globals";
 
 .add-And-Select {
   margin: 0;
@@ -36,7 +36,7 @@
 .select-All-icon {
   width: 24px;
   height: 12px;
-  background: url("../../images/icons/select-all.png") no-repeat 0 0;
+  background: url("../../../images/icons/select-all.png") no-repeat 0 0;
   position: absolute;
   left: 50%;
   top: 50%;

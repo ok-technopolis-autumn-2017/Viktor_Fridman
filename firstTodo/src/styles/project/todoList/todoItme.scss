@@ -1,4 +1,4 @@
-@import "../config/globals";
+@import "../../config/globals";
 
 .todo-item {
   margin: 0;
@@ -81,7 +81,7 @@
 .todo-item:hover .todos-item_delete_icon {
   width: 24px;
   height: 24px;
-  background: url("../../images/icons/close.png") no-repeat 0 0;
+  background: url("../../../images/icons/close.png") no-repeat 0 0;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -140,7 +140,7 @@
   position: absolute;
   width: 24px;
   height: 24px;
-  background: url("../../images/icons/completed.png") no-repeat 0 0;
+  background: url("../../../images/icons/completed.png") no-repeat 0 0;
   left: 50%;
   top: 50%;
   margin-left: -10px;
