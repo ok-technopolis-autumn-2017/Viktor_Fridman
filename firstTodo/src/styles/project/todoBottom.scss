@@ -1,91 +1,46 @@
 @import "../config/globals";
-
-.todo-Bottom{
+.todo-Bottom {
+    margin: 0;
+    padding: 0;
     display: flex;
-    height: 40px;
-    border-top: 1px solid $color-border;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-
-.todo-Bottom-left-Items{
-    position: relative;
-    display: block;
-    float: left;
-    color: rgb(136,136,136);
-    padding: 1px 0px 1px 0px;
-    top: 50%;
-    margin-top: -8px;
-    margin-left: 12px;
-}
-
-.todo-Bottom-item-Filter{
-    position: relative;
-    display: flex;
-    height: auto;
-    width: 200px;
-    top: 50%;
-    margin: 0 auto;
-    margin-top: -10px;
+    font-size: 16px;
+    color: #d6d6d6;
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
-.todo-Bottom-Filter-all-Items{
-    display: flex;
-    float: left;
-    background: none;
-    border: 1px solid $c-white;
-    border-radius: 10%;
-    color: rgb(136,136,136);
+.todo-Bottom-left-Items {
+    margin: 12px;
+    height: 24px;
+}
+
+.todo-Bottom-item-Filter {
+    height: 24px;
+    margin: 12px;
+}
+
+.todo-Bottom-clear-Done {
+    height: 24px;
+    margin: 12px;
+}
+
+.todo-Bottom-clear-Done-button {
+    display: inline;
+    padding: 0px;
+    margin: 0px;
+    font-size: 16px;
+    color: #d6d6d6;
+    box-sizing: border-box;
+    border: 2px solid #fff;
+    border-radius: 2px;
     cursor: pointer;
-}
-
-.todo-Bottom-Filter-active-Items{
-    display: flex;
     background: none;
-    border: 1px solid $c-white;
-    border-radius: 10%;
-    color: rgb(136,136,136);
-    horiz-align: center;
-    cursor: pointer;
+    outline: none;
 }
 
-.todo-Bottom-Filter-Completed-Items{
-    display: flex;
-    float: right;
-    background: none;
-    border: 1px solid $c-white;
-    border-radius: 10%;
-    color: rgb(136,136,136);
-    cursor: pointer;
-}
-
-.todos-actionbar_filter-all:focus,
-.todos-actionbar_filter-active:focus,
-.todos-actionbar_filter-ready:focus,
-.__active{
-    border: 1px solid rgb(235,223,223);
-}
-
-.todo-Bottom-clear-Done{
-    position: relative;
-    display: flex;
-    float: right;
-    background: none;
-    border: 1px solid $c-white;
-    border-radius: 10%;
-    color: rgb(136,136,136);
-    padding: 1px 0px 1px 0px;
-    top: 50%;
-    margin-top: -10px;
-    margin-right: 12px;
-    cursor: pointer;
-}
-
-.__one-element .todo-Bottom-left-Items,
-.__one-element .todo-Bottom-clear-Done{
-    visibility: hidden;
+.todo-Bottom-clear-Done-button:hover,
+.todo-Bottom-clear-Done-button:focus {
+    border: 2px solid #efefef;
+    border-radius: 2px;
 }
