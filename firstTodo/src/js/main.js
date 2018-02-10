@@ -5,7 +5,7 @@ var FilterTypes = require('./constants/FilterTypes');
 function init() {
     if (model.isEmpty()) {
         model.addTodos({
-            "todosFilter": FilterTypes.FILTER_ALL
+            "todo-Bottom-Filter": FilterTypes.FILTER_ALL
         })
     }
 

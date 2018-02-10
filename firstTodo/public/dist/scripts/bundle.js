@@ -468,7 +468,7 @@ var FilterTypes = __webpack_require__(5);
 function init() {
     if (model.isEmpty()) {
         model.addTodos({
-            "todosFilter": FilterTypes.FILTER_ALL
+            "todo-Bottom-Filter": FilterTypes.FILTER_ALL
         })
     }
 
@@ -938,7 +938,7 @@ setTodosFilterToModelPrototype.onUpdateModel = new Observable();
 setTodosFilterToModelPrototype.getNewModelState = function(value) {
     if (value.type.localeCompare(ActionsTypes.SET_VISIBILITY_FILTER) == 0) {
         var currentModel = setTodosFilterToModelPrototype.model.addTodos({
-            "todosFilter": value.filter
+            "todo-Bottom-Filter": value.filter
         });
         setTodosFilterToModelPrototype.onUpdateModel.deliver(currentModel);
 

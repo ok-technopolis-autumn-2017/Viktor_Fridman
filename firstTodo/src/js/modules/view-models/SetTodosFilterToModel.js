@@ -15,7 +15,7 @@ setTodosFilterToModelPrototype.onUpdateModel = new Observable();
 setTodosFilterToModelPrototype.getNewModelState = function(value) {
     if (value.type.localeCompare(ActionsTypes.SET_VISIBILITY_FILTER) == 0) {
         var currentModel = setTodosFilterToModelPrototype.model.addTodos({
-            "todosFilter": value.filter
+            "todo-Bottom-Filter": value.filter
         });
         setTodosFilterToModelPrototype.onUpdateModel.deliver(currentModel);
 
