@@ -1,4 +1,4 @@
-var model = require('./modules/model/Model');
+var model = require('./models/model/Model');
 var TodosContainer = require('./componets/TodosContainer');
 var FilterTypes = require('./constants/FilterTypes');
 

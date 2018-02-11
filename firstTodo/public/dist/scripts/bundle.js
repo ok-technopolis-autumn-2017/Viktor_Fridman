@@ -60,1013 +60,835 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
 
-Observable = function() {
-    this.observers = [];
-};
+/**
+ * @param {Function} Extendable
+ * @param {Function} Extension
+ * @return {Function} Extendable
+ */
+function extendConstructor(Extendable, Extension) {
+    var extendablePrototype = Extendable.prototype;
+    var extensionPrototype = Extension.prototype;
 
-Observable.prototype.deliver =function(data) {
-    for (var i in this.observers) {
-        this.observers[i].func.call(this.observers[i].context, data);
+    for (var p in extensionPrototype) {
+        extendablePrototype[p] = extensionPrototype[p];
     }
-};
 
-module.exports = Observable;
+    return Extendable;
+}
 
-
-
+module.exports = extendConstructor;
 
 /***/ }),
-    (function(module, exports) {
-
-        Function.prototype.subscribe = function(observable, context) {
-            var ctx = context || this; //если контекст вызова не задан, то контекстом считается this «по-умолчанию», то есть текущая функция
-            var observer = { //теперь наблюдатель будет сообщать, в каком контексте нужно вызвать функцию
-                context: ctx,
-                func: this
-            };
-            observable.observers.push(observer);
-            return this;
-        };
-
-        module.exports = Function.prototype.subscribe;
-
-
-        /***/ }),
-
-
-
-
 /* 1 */
 /***/ (function(module, exports) {
 
-var CONSTS = {
-    "ADD_TODOS": 'ADD_TODOS',
-    "TOGGLE_TODOS": 'TOGGLE_TODOS',
-    "DELETE_TODOS": 'DELETE_TODOS',
-    "MAKE_ALL_COMPLETED_TODOS": 'MAKE_ALL_COMPLETED_TODOS',
-    "DELETE_ALL_COMPLETED_TODOS": 'DELETE_ALL_COMPLETED_TODOS',
-    "SET_VISIBILITY_FILTER": 'SET_VISIBILITY_FILTER'
+function Eventable() {}
+
+var eventablePrototype = Eventable.prototype;
+
+eventablePrototype._initEventable = function () {
+    this._eventable_registry = {};
 };
 
-module.exports = CONSTS;
+function getEventSubscribers(eventable, eventName, needCreate) {
+    var registry = eventable._eventable_registry;
+
+    if (eventName in registry) {
+        return registry[eventName];
+
+    } else if (needCreate) {
+        return registry[eventName] = [];
+    }
+
+    return null;
+}
+
+eventablePrototype.on = function (eventName, handler, ctx) {
+    var subscribers = getEventSubscribers(this, eventName, true);
+
+    subscribers.push({
+        handler: handler,
+        ctx: ctx
+    });
+
+    return this;
+};
+
+eventablePrototype.off = function (eventName, handler, ctx) {
+    var subscribers = getEventSubscribers(this, eventName);
+
+    if (subscribers) {
+        for (var i = subscribers.length; i-- ;) {
+            if ((subscribers[i].handler === handler)
+                && (subscribers[i].ctx === ctx)
+            ) {
+                subscribers.splice(i, 1);
+                return this;
+            }
+        }
+    }
+
+    return this;
+};
+
+eventablePrototype.trigger = function (eventName, data) {
+    var subscribers = getEventSubscribers(this, eventName);
+
+    if (subscribers) {
+        var subscribersCopy = subscribers.slice();
+        for (var i = 0, l = subscribersCopy.length; i !== l; i += 1) {
+            subscribersCopy[i].handler.call(subscribersCopy[i].ctx, data);
+        }
+    }
+
+    return this;
+};
+
+module.exports = Eventable;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var DataStorage = __webpack_require__(8);
+function EAST_SLAVIC_ALGORITHM(number) {
+    var value = Math.abs(number);
 
-var Model = {
-    "storage": new DataStorage(),
+    if ((value % 10 === 1) && (value % 100 !== 11)) {
+        return 0;
+    }
+    if ((2 <= (value % 10))
+        && ((value % 10) <= 4)
+        && (Math.floor((value % 100) / 10) !== 1)
+    ) {
+        return 1;
+    }
 
-    "getModel": function () {
-        return this.storage.getLocalStorage("todos")
+    return 2;
+}
+
+function ROMANO_GERMANIC_ALGORITHM(number) {
+    return (Math.abs(number) === 1) ? 0 : 1;
+}
+
+var pluralAlgorithms = {
+    'ru': EAST_SLAVIC_ALGORITHM,
+    'en': ROMANO_GERMANIC_ALGORITHM
+};
+
+var l10n = {
+    language: 'ru',
+    _dictionaries: {},
+
+    /**
+     * @param {String} key
+     * @return {String}
+     * @private
+     */
+    _getDictValue: function (key) {
+        var language = this.language;
+
+        if (!(language in this._dictionaries)
+            || !(key in this._dictionaries[language])
+        ) {
+            return null;
+        }
+
+        return this._dictionaries[language][key];
     },
 
-    "addTodos": function (value) {
-        this.storage.setLocalStorage(value);
-        return this.storage.getLocalStorage("todos")
+    /**
+     * @param {String} languageCode
+     * @param {Object} dict
+     * @return {l10n}
+     */
+    provideDict: function (languageCode, dict) {
+        this._dictionaries[languageCode] = dict;
+        return this;
     },
 
-    "isEmpty": function () {
-        return this.storage.isLocalStorageEmpty()
+    /**
+     * @param {String} key
+     * @return {String}
+     */
+    simple: function (key) {
+        var dictValue = this._getDictValue(key);
+        if (dictValue !== null) {
+            return dictValue;
+        }
+        return key;
     },
 
-    "makeAllCompleted": function () {
-        this.storage.makeAllCompletedLocalStorage();
-        return this.storage.getLocalStorage("todos");
-    },
+    /**
+     * @param {String} key
+     * @param {Number} number
+     * @return {String}
+     */
+    plural: function (key, number) {
+        var dictValue = this._getDictValue(key);
+        if (dictValue === null) {
+            return key;
+        }
 
-    "toggleItem" : function (id) {
-        this.storage.toggleTodosLocalStorage(id);
-        return this.storage.getLocalStorage("todos");
-    },
+        var currentPluralAlgorithm = pluralAlgorithms[this.language] || pluralAlgorithms.ru;
+        var result = dictValue[currentPluralAlgorithm(number)];
 
-    "deleteItem": function (id) {
-        this.storage.deleteTodosLocalStorage(id);
-        return this.storage.getLocalStorage("todos");
-    },
+        if (result != null) {
+            return result;
+        }
+        return key;
 
-    "deleteAllCompletedItems": function () {
-        this.storage.deleteAllCompletedTodosLocalStorage();
-        return this.storage.getLocalStorage("todos");
     }
 };
 
-module.exports = Model;
+module.exports = l10n;
 
 /***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Observable = __webpack_require__(0);
-var ActionsTypes = __webpack_require__(1);
+var l10n = __webpack_require__(2);
 
-var TODOS_ADD_INPUT = ".todo-add_input";
-var TODOS_MAKE_ALL_COMPLETED_BUTTON = ".select-All";
-var ENTER_KEY_CODE = 13;
+var TodoMain = __webpack_require__(4);
+var AddTodos = __webpack_require__(5);
+var TodoList = __webpack_require__(6);
+var TodoActionsBar = __webpack_require__(9);
 
-function AddTodosConstructor() {
-    if(this.todosAddInput)
-    this.todosAddInput.addEventListener('keypress', this.handlerKeyPress);
-    if(this.todosDelButton)
-    this.todosDelButton.addEventListener('click', this.handlerClick);
+function init() {
+    var rusDictionary = {
+        'todosCountLabel': ['task(s)', 'task(s)', 'task(s)']
+    };
+    l10n.provideDict('ru', rusDictionary);
+
+    var todoMain = new TodoMain();
+    var addTodos = new AddTodos();
+    var todoList = new TodoList();
+    var todoActionsBar = new TodoActionsBar();
+
+
+    addTodos
+        .on('newTodo',
+            function (todoData) { todoList.createItem(todoData); }
+        )
+        .on('markAsReadyAll',
+            function () { todoList.markAsReadyAll();}
+        );
+
+    function itemsCountWatcher () {
+        var itemsCount = todoList.getItemsCount();
+
+        if (itemsCount !== 0) {
+            todoMain.showFullInterface();
+        }
+
+        todoActionsBar.setItemsCount(itemsCount);
+    }
+
+    todoList.on('itemAdd', itemsCountWatcher)
+        .on('itemDelete', itemsCountWatcher);
+
+    todoActionsBar.on(
+        'clearCompleted',
+        function () { todoList.removeCompletedItems(); }
+    );
+
+    todoActionsBar.on('filterSelected', function (filterId) {
+        todoList.setFilter(filterId);
+    });
+
 }
 
-var addTodosConstructorPrototype = AddTodosConstructor.prototype;
-
-addTodosConstructorPrototype.todosAddInput = document
-    .querySelector(TODOS_ADD_INPUT);
-
-addTodosConstructorPrototype.todosDelButton = document
-    .querySelector(TODOS_MAKE_ALL_COMPLETED_BUTTON);
-
-addTodosConstructorPrototype.onChange = new Observable();
-
-addTodosConstructorPrototype.setVisibility = function (numTodoItems) {
-    if (numTodoItems == 0) {
-        this.todosDelButton.style.visibility = "hidden";
-    } else {
-        this.todosDelButton.style.visibility = "visible";
-    }
-};
-
-addTodosConstructorPrototype.handlerKeyPress = function (event) {
-    if (event.keyCode == ENTER_KEY_CODE) {
-        addTodosConstructorPrototype.onChange.deliver({
-            "type": ActionsTypes.ADD_TODOS,
-            "id": new Date().getTime(),
-            "text": this.value
-        });
-        this.value = '';
-    }
-};
-
-addTodosConstructorPrototype.handlerClick = function (event) {
-    addTodosConstructorPrototype.onChange.deliver({
-        "type": ActionsTypes.MAKE_ALL_COMPLETED_TODOS
-    });
-};
-
-module.exports = new AddTodosConstructor();
+document.addEventListener('DOMContentLoaded', init);
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var TodosItem = __webpack_require__(13);
-var Observable = __webpack_require__(0);
-var ActionsTypes = __webpack_require__(1);
+var TODOS_MAIN_SELECTOR = '.js-main-Body';
+var FULL_INTERFACE_MODIFICATOR = '__has-todos';
 
-var TODOS_LIST = ".todo-List";
-
-var TODOS_DELETE_BUTTON_CLASS_NAME = "todos-item_delete";
-var TODOS_CHECKBOX_CLASS_NAME =
-    ["todos-item_done-mark", "todos-item_undone-mark"];
-
-
-function TodosListConstructor() {
-    if(this.todosList)
-    this.todosList.addEventListener('click', this.handlerClick);
+function TodoMainConstructor() {
+    this._todosMain = document.querySelector(TODOS_MAIN_SELECTOR);
 }
 
-function deleteDeletedNodes(parent, ids) {
-    var childrens = parent.children;
-    var removeChildren = [];
-    var i, j, flag;
+var todoMainComponentConstructorPrototype = TodoMainConstructor.prototype;
 
-    for (i = 0; i < childrens.length; i++) {
-        flag = true;
-        for (j = 0; j < ids.length; j++) {
-            if (childrens[i].id == ids[j]) {
-                flag = false;
-                break;
-            }
-        }
-
-        if (flag) {
-            removeChildren.push(childrens[i])
-        }
-
-        flag = true
-    }
-
-    for (i = 0; i < removeChildren.length; i++) {
-        parent.removeChild(removeChildren[i])
-    }
-    i = null;
-}
-
-var todosListConstructorPrototype = TodosListConstructor.prototype;
-
-todosListConstructorPrototype.todosList = document.querySelector(TODOS_LIST);
-
-todosListConstructorPrototype.onChange = new Observable();
-
-todosListConstructorPrototype.handlerClick = function (event) {
-    switch (event.target.className) {
-        case TODOS_CHECKBOX_CLASS_NAME[0]:
-        case TODOS_CHECKBOX_CLASS_NAME[1]: {
-            todosListConstructorPrototype.onChange.deliver({
-                "type": ActionsTypes.TOGGLE_TODOS,
-                "id": event.target.parentNode.parentNode.id
-            })
-        } break;
-
-        case TODOS_DELETE_BUTTON_CLASS_NAME: {
-            todosListConstructorPrototype.onChange.deliver({
-                "type": ActionsTypes.DELETE_TODOS,
-                "id": event.target.parentNode.parentNode.id
-            })
-        } break;
-    }
+todoMainComponentConstructorPrototype.showFullInterface = function () {
+    this._todosMain.classList.add(FULL_INTERFACE_MODIFICATOR);
+    return this;
 };
 
-todosListConstructorPrototype.render = function (currentModel) {
-    currentModel.todosArray.forEach(function (currentItemProps, i, array) {
-        var TodosItemNode = document.getElementById(currentItemProps.id);
-
-        if (TodosItemNode === null) {
-
-            var newTodosItem = TodosItem.render(currentItemProps,
-                currentModel.currentFilter);
-
-            todosListConstructorPrototype.todosList.appendChild(newTodosItem);
-
-            newTodosItem = null;
-
-
-        } else {
-
-            TodosItem.update(currentItemProps, currentModel.currentFilter,
-                TodosItemNode);
-
-        }
-    });
-
-    var curIds = currentModel.todosArray.map(function (item) {
-        return item.id;
-    });
-
-    deleteDeletedNodes(todosListConstructorPrototype.todosList, curIds);
-
-    curIds = null;
+todoMainComponentConstructorPrototype.hideFullInterface = function () {
+    this._todosMain.classList.remove(FULL_INTERFACE_MODIFICATOR);
+    return this;
 };
 
-
-module.exports = new TodosListConstructor();
+module.exports = TodoMainConstructor;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-var CONSTS = {
-    "FILTER_ALL": 'todos-filter __all',
-    "FILTER_COMPLETED": 'todos-filter __completed',
-    "FILTER_ACTIVE": 'todos-filter __active'
+var extendConstructor = __webpack_require__(0);
+var Eventable = __webpack_require__(1);
+
+var ENTER_KEY_CODE = 13;
+
+var TODOS_TODO_INPUT_SELECTOR = '.js-todos-todo-input';
+var TODOS_SELECT_ALL_SELECTOR = '.js-todos-select-all';
+
+/**
+ * @implements {EventListener}
+ * @extends {Eventable}
+ * @constructor
+ */
+function AddTodosConstructor() {
+    this._todoInput = document.querySelector(TODOS_TODO_INPUT_SELECTOR);
+    this._todoSelectAll = document.querySelector(TODOS_SELECT_ALL_SELECTOR);
+
+    this._todoInput.addEventListener('keypress', this);
+    this._todoSelectAll.addEventListener('click', this);
+
+    this._initEventable();
+}
+
+extendConstructor(AddTodosConstructor, Eventable);
+
+var addTodosConstructorPrototype = AddTodosConstructor.prototype;
+
+addTodosConstructorPrototype._markAsReadyAll = function () {
+    return this.trigger('markAsReadyAll');
 };
 
-module.exports = CONSTS;
+addTodosConstructorPrototype._addItem = function () {
+    var todoInputValue = this._todoInput.value.trim();
+
+    if (todoInputValue.length !== 0) {
+        this._todoInput.value = '';
+    }
+
+    return this.trigger('newTodo', {text: todoInputValue});
+};
+
+addTodosConstructorPrototype.handleEvent = function (e) {
+    switch (e.type) {
+        case 'click':
+            this._markAsReadyAll();
+            break;
+        case 'keypress':
+            if (e.keyCode === ENTER_KEY_CODE) {
+                this._addItem();
+            }
+            break;
+    }
+};
+
+module.exports = AddTodosConstructor;
 
 /***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Observable = __webpack_require__(0);
-var ActionsTypes = __webpack_require__(1);
-var FilterTypes = __webpack_require__(5);
+var Eventable = __webpack_require__(1);
+var extendConstructor = __webpack_require__(0);
 
-var TODOS_FILTERS_CLASS = ".todo-Bottom-item-Filter";
+var TodoItem = __webpack_require__(7);
 
-function TodosFiltersConstructor() {
-    if (this.todosDelButton)
-        this.todosDelButton.addEventListener('click', this.handlerClick);
+var TODO_LIST_SELECTOR = '.js-todo-List';
+var itemsIdIterator = 0;
+
+/**
+ * @extends {Eventable}
+ * @constructor
+ */
+function TodoListConstructor() {
+    /**
+     * @type {Array.<TodoItemConstructor>}
+     * @private
+     */
+    this._items = [];
+    this._todosList = document.querySelector(TODO_LIST_SELECTOR);
+    this._currentFilter = 'all';
+
+    this._initEventable();
 }
 
-var todosFiltersConstructorPrototype = TodosFiltersConstructor.prototype;
+extendConstructor(TodoListConstructor, Eventable);
 
-todosFiltersConstructorPrototype.todosDelButton =
-    document.querySelector(TODOS_FILTERS_CLASS);
+var todoListConstructorPrototype = TodoListConstructor.prototype;
 
-todosFiltersConstructorPrototype.onChange = new Observable();
+/**
+ * @return {Number}
+ */
+todoListConstructorPrototype.getItemsCount =function () {
+    return this._items.length;
+};
 
-todosFiltersConstructorPrototype.setFocus = function (
-    currentFilter, choosenFilter, type) {
+/**
+ * @param {Object} todoItemData
+ * @return {TodoListConstructor}
+ */
+todoListConstructorPrototype.createItem = function (todoItemData) {
+    var item = new TodoItem(Object.assign(
+        {
+            id: itemsIdIterator++,
+        },
+        todoItemData
+    ));
 
-    switch (choosenFilter) {
-        case FilterTypes.FILTER_ALL: {
-            if (currentFilter.localeCompare(FilterTypes.FILTER_ALL) == 0) {
-                if (type = "b") {
-                    return '2px solid #efefef'
-                } else {
-                    return '2px'
-                }
-            } else {
-                if (type = "b") {
-                    return '2px solid #fff'
-                } else {
-                    return '2px'
-                }
-            }
-        } break;
+    this._items.push(item);
 
-        case (FilterTypes.FILTER_ACTIVE): {
+    item.on('change', this._onItemChange, this)
+        .on('remove', this._onItemRemove, this)
+        .render(this._todosList);
 
-            if (currentFilter.localeCompare(FilterTypes.FILTER_ACTIVE) == 0) {
-                if (type = "b") {
-                    return '2px solid #efefef'
-                } else {
-                    return '2px'
-                }
-            } else {
-                if (type = "b") {
-                    return '2px solid #fff'
-                } else {
-                    return '2px'
-                }
-            }
-        } break;
+    this.trigger('itemAdd', item);
 
-        case (FilterTypes.FILTER_COMPLETED): {
-            if (currentFilter.localeCompare(
-                FilterTypes.FILTER_COMPLETED) == 0) {
-                if (type = "b") {
-                    return '2px solid #efefef'
-                } else {
-                    return '2px'
-                }
-            } else {
-                if (type = "b") {
-                    return '2px solid #fff'
-                } else {
-                    return '2px'
-                }
-            }
-        } break;
+    return this;
+};
+
+/**
+ * @return {TodoListConstructor}
+ */
+todoListConstructorPrototype.removeCompletedItems = function () {
+    var items = this._items;
+    var i = items.length;
+
+    for (; i-- ;) {
+        if (items[i].model.isReady) {
+            items[i].remove();
+        }
     }
+
+    return this;
 };
 
-todosFiltersConstructorPrototype.handlerClick = function (event) {
-    if (event.target.className.localeCompare(
-        FilterTypes.FILTER_COMPLETED) == 0 ||
-        event.target.className.localeCompare(
-            FilterTypes.FILTER_ACTIVE) == 0||
-        event.target.className.localeCompare(
-            FilterTypes.FILTER_ALL) == 0) {
+/**
+ * @param {Number} itemId
+ * @return {TodoItem|null}
+ * @private
+ */
+todoListConstructorPrototype._getItemById = function (itemId) {
+    var items = this._items;
 
-        todosFiltersConstructorPrototype.onChange.deliver({
-            "type": ActionsTypes.SET_VISIBILITY_FILTER,
-            "filter": event.target.className
-        });
-
+    for (var i = items.length; i-- ;) {
+        if (items[i].model.id === itemId) {
+            return items[i];
+        }
     }
+
+    return null;
 };
 
-todosFiltersConstructorPrototype.render = function (currentFilter) {
-    document.getElementsByClassName(FilterTypes.FILTER_ALL)[0].style.border =
-            todosFiltersConstructorPrototype.setFocus(currentFilter,
-                FilterTypes.FILTER_ALL, "b");
-    document.getElementsByClassName(FilterTypes.FILTER_ACTIVE)[0].style.border =
-        todosFiltersConstructorPrototype.setFocus(currentFilter,
-            FilterTypes.FILTER_ACTIVE, "b");
-    document.getElementsByClassName(FilterTypes.FILTER_COMPLETED)[0]
-        .style.border =
-        todosFiltersConstructorPrototype.setFocus(currentFilter,
-            FilterTypes.FILTER_COMPLETED, "b");
-    document.getElementsByClassName(FilterTypes.FILTER_ALL)[0]
-        .style.borderRadius =
-        todosFiltersConstructorPrototype.setFocus(currentFilter,
-            FilterTypes.FILTER_ALL, "br");
-    document.getElementsByClassName(FilterTypes.FILTER_ACTIVE)[0]
-        .style.borderRadius =
-        todosFiltersConstructorPrototype.setFocus(currentFilter,
-            FilterTypes.FILTER_ACTIVE, "br");
-    document.getElementsByClassName(FilterTypes.FILTER_COMPLETED)[0]
-        .style.borderRadius =
-        todosFiltersConstructorPrototype.setFocus(currentFilter,
-            FilterTypes.FILTER_COMPLETED, "br");
-
+todoListConstructorPrototype._onItemChange = function (itemModel) {
+    this.filterShowedItems(this._currentFilter);
 };
 
-module.exports = new TodosFiltersConstructor();
+todoListConstructorPrototype._onItemRemove = function (itemId) {
+    var todoItemComponent = this._getItemById(itemId);
+
+    if (todoItemComponent) {
+        todoItemComponent.off('change', this._onItemChange, this);
+        todoItemComponent.off('remove', this._onItemRemove, this);
+        var todoItemComponentIndex = this._items.indexOf(todoItemComponent);
+        this._items.splice(todoItemComponentIndex, 1);
+        this.trigger('itemDelete', todoItemComponent.model);
+    }
+
+    return this;
+};
+
+/**
+ * @return {TodoListConstructor}
+ */
+todoListConstructorPrototype.markAsReadyAll = function () {
+    this._items.forEach(function (todoItem) {
+        todoItem.setReady(true);
+    });
+    return this;
+};
+
+/**
+ * @param {String} filterId
+ * @return {TodoListConstructor}
+ */
+todoListConstructorPrototype.setFilter = function (filterId) {
+    this._currentFilter = filterId;
+    return this.filterShowedItems(filterId);
+};
+
+/**
+ * @param {String} filterId
+ * @return {TodoListConstructor}
+ */
+todoListConstructorPrototype.filterShowedItems = function (filterId) {
+    this._items.forEach(function (item) {
+        switch (filterId) {
+            case 'all':
+                item.show();
+                break;
+            case 'ready':
+                if (item.model.isReady) {
+                    item.show();
+                } else {
+                    item.hide();
+                }
+                break;
+            case 'unready':
+                if (!item.model.isReady) {
+                    item.show();
+                } else {
+                    item.hide();
+                }
+                break;
+        }
+    });
+    return this;
+};
+
+module.exports = TodoListConstructor;
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var model = __webpack_require__(2);
-var TodosContainer = __webpack_require__(9);
-var FilterTypes = __webpack_require__(5);
+var Eventable = __webpack_require__(1);
+var extendConstructor = __webpack_require__(0);
+var templatesEngine = __webpack_require__(8);
 
-function init() {
-    if (model.isEmpty()) {
-        model.addTodos({
-            "todo-Bottom-Filter": FilterTypes.FILTER_ALL
-        })
+var READY_MODIFICATOR = '__ready';
+var HIDDEN_MODIFICATOR = '__hide';
+
+/**
+ * @param itemData
+ * @implements {EventListener}
+ * @constructor
+ */
+function TodoItemConstructor(itemData) {
+    this._initEventable();
+
+    var templateResult = templatesEngine.todoItem({
+        text: itemData.text
+    });
+
+    this._root = templateResult.root;
+    this._markReady = templateResult.markReady;
+    this._removeAction = templateResult.removeAction;
+    this._text = templateResult.text;
+
+    this.model = {
+        id: itemData.id,
+        isReady: itemData.isReady || false,
+        text: itemData.text
+    };
+
+    if (itemData.isReady) {
+        this._setReadyModificator(true);
     }
 
-    new TodosContainer().render(model.getModel())
+    this._markReady.addEventListener('change', this);
+    this._removeAction.addEventListener('click', this);
+    this._text.addEventListener('input', this);
 }
 
+extendConstructor(TodoItemConstructor, Eventable);
 
-document.addEventListener('DOMContentLoaded', init);
+var todoItemConstructorPrototype = TodoItemConstructor.prototype;
 
+/**
+ * @param {HTMLElement} parent
+ * @return {TodoItemConstructor}
+ */
+todoItemConstructorPrototype.render = function (parent) {
+    parent.appendChild(this._root);
+    return this;
+};
 
+/**
+ * @param {Event} e
+ */
+todoItemConstructorPrototype.handleEvent = function (e) {
+    switch (e.type) {
+        case 'change':
+            this.setReady(this._markReady.checked);
+            break;
+        case 'click':
+            if (e.target === this._removeAction) {
+                this.remove();
+            }
+            break;
+        case 'input':
+            this.setText(this._text.innerText);
+            break;
+    }
+};
+
+/**
+ * @param {String} text
+ * @return {TodoItemConstructor}
+ */
+todoItemConstructorPrototype.setText = function (text) {
+    if (this.model.text !== text) {
+        this._text.innerHTML = text;
+        this.model.text = text;
+        this.trigger('change', this.model);
+    }
+    return this;
+};
+
+/**
+ * @param {Boolean} isReady
+ * @return {TodoItemConstructor}
+ * @private
+ */
+todoItemConstructorPrototype._setReadyModificator = function (isReady) {
+    if (isReady) {
+        this._root.classList.add(READY_MODIFICATOR);
+    } else {
+        this._root.classList.remove(READY_MODIFICATOR);
+    }
+    return this;
+};
+
+/**
+ * @param {Boolean} isReady
+ * @return {TodoItemConstructor}
+ */
+todoItemConstructorPrototype.setReady = function (isReady) {
+    if (isReady !== this.model.isReady) {
+        this._markReady.checked = isReady;
+        this.model.isReady = isReady;
+        this._setReadyModificator(isReady);
+        this.trigger('change', this.model);
+    }
+    return this;
+};
+
+/**
+ * @return {TodoItemConstructor}
+ */
+todoItemConstructorPrototype.remove = function () {
+    this._root.parentNode.removeChild(this._root);
+    this.trigger('remove', this.model.id);
+    return this;
+};
+
+/**
+ * @return {TodoItemConstructor}
+ */
+todoItemConstructorPrototype.show = function () {
+    this._root.classList.remove(HIDDEN_MODIFICATOR);
+    return this;
+};
+
+/**
+ * @return {TodoItemConstructor}
+ */
+todoItemConstructorPrototype.hide = function () {
+    this._root.classList.add(HIDDEN_MODIFICATOR);
+    return this;
+};
+
+module.exports = TodoItemConstructor;
 
 /***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
-function DataStorageConstructor() {}
 
-var dataStorageConstructorPrototype = DataStorageConstructor.prototype;
+var div = document.createElement('div');
 
-dataStorageConstructorPrototype.quotaTry
-    = function() {
-    try {
-        localStorage.setItem("todos", JSON.stringify(todosStructure));
-    } catch (e) {
-        if (e == QUOTA_EXCEEDED_ERR) {
-            alert('Sorry')
-        }
-    }
-};
+function getTemplateRootNode(scriptId) {
+    var scriptTag = document.getElementById(scriptId);
+    div.innerHTML = scriptTag.innerHTML;
+    var result = div.children[0];
+    div.removeChild(result);
+    return result;
+}
 
-dataStorageConstructorPrototype.getLocalStorage = function (key) {
-    return JSON.parse(localStorage.getItem(key));
-};
+var templatesEngine = {
+    todoItem: function (data) {
+        var root = getTemplateRootNode('todoItemTemplate');
 
-dataStorageConstructorPrototype.setLocalStorage = function (value) {
-    var structure;
+        var markReady = root.querySelector('.js-todo-item_mark-ready');
+        var removeAction = root.querySelector('.js-todo-item_remove-action');
+        var text = root.querySelector('.js-todo-item_text');
 
-    if (localStorage.length === 0) {
-        if (value.todosItem === undefined) {
-            structure = {
-                "todosArray": [],
-                "currentFilter": value.todosFilter
-            }
-        } else {
-            structure = {
-                "todosArray": [value.todosItem],
-                "currentFilter": value.todosFilter
-            }
-        }
-    } else {
-        structure = this.getLocalStorage("todos");
-        if (value.todosItem !== undefined) {
-            structure.todosArray.push(value.todosItem);
+        if (data.text) {
+            text.innerText = data.text;
         }
 
-        if (value.todosFilter !== undefined) {
-            structure.currentFilter = value.todosFilter;
+        if (data.isReady) {
+            markReady.checked = true;
         }
-    }
 
-    dataStorageConstructorPrototype.quotaTry();
-
-    structure = null;
-};
-
-dataStorageConstructorPrototype.isLocalStorageEmpty = function () {
-    var structure = this.getLocalStorage("todos");
-
-    return (structure === null);
-
-};
-
-dataStorageConstructorPrototype.makeAllCompletedLocalStorage = function () {
-    var structure = this.getLocalStorage("todos");
-
-    structure.todosArray = structure.todosArray.map(function (todosItem) {
         return {
-            "id": todosItem.id,
-            "text": todosItem.text,
-            "completed": true
-        }
-    });
-
-    dataStorageConstructorPrototype.quotaTry();
-
-    structure = null;
+            root: root,
+            text: text,
+            markReady: markReady,
+            removeAction: removeAction
+        };
+    }
 };
 
-dataStorageConstructorPrototype.toggleTodosLocalStorage = function(id) {
-    var structure = this.getLocalStorage("todos");
-
-    structure.todosArray = structure.todosArray.map(function (todosItem) {
-        if (todosItem.id == id) {
-            return {
-                "id": todosItem.id,
-                "text": todosItem.text,
-                "completed": !todosItem.completed
-            }
-        }
-
-        return todosItem
-    });
-
-    dataStorageConstructorPrototype.quotaTry();
-    structure = null;
-};
-
-dataStorageConstructorPrototype.deleteTodosLocalStorage = function(id) {
-    var structure = this.getLocalStorage("todos");
-
-    structure.todosArray = structure.todosArray.filter(function (todosItem) {
-        return todosItem.id != id;
-
-
-    });
-
-    dataStorageConstructorPrototype.quotaTry();
-
-    structure = null;
-};
-
-dataStorageConstructorPrototype.deleteAllCompletedTodosLocalStorage
-    = function() {
-
-    var structure = this.getLocalStorage("todos");
-
-    structure.todosArray = structure.todosArray.filter(function (todosItem) {
-        return !todosItem.completed;
-
-
-    });
-
-    dataStorageConstructorPrototype.quotaTry();
-    structure = null;
-};
-
-module.exports = DataStorageConstructor;
+module.exports = templatesEngine;
 
 /***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var addTodosToModel = __webpack_require__(10);
-var makeAllCompletedTodosToModel = __webpack_require__(
-    11);
-var toggleTodosToModel = __webpack_require__(12);
-var deleteTodosToModel = __webpack_require__(14);
-var setTodosFilterToModel = __webpack_require__(
-    15);
-var deleteAllCompletedTodosToModel = __webpack_require__(
-    16);
+var extendConstructor = __webpack_require__(0);
+var getTextNode = __webpack_require__(10);
+var Eventable = __webpack_require__(1);
+var l10n = __webpack_require__(2);
+var Filter = __webpack_require__(11);
 
-var AddTodos = __webpack_require__(3);
-var TodosList = __webpack_require__(4);
-var TodosBar = __webpack_require__(18);
+/**
+ * @constructor
+ * @implements {EventListener}
+ */
+function TodoActionsBarConstructor() {
+    this._initEventable();
 
-function TodosContainerConstructor() {
-    this.render.subscribe(addTodosToModel.onUpdateModel);
-    this.render.subscribe(makeAllCompletedTodosToModel.onUpdateModel);
-    this.render.subscribe(toggleTodosToModel.onUpdateModel);
-    this.render.subscribe(deleteTodosToModel.onUpdateModel);
-    this.render.subscribe(setTodosFilterToModel.onUpdateModel);
-    this.render.subscribe(deleteAllCompletedTodosToModel.onUpdateModel);
+    this._counterNode = document.querySelector('.js-todo-Bottom-left-Items');
+    this._counterNodeText = getTextNode(this._counterNode);
+    this._clearCompletedNode = document.querySelector('.js-todo-Bottom-clear-Done-button');
+
+    this._clearCompletedNode.addEventListener('click', this);
+
+    this._filters = new Filter(document.querySelector('.js-todo-Bottom_filter'));
+
+    this._filters.on('filterSelected', this._onFilterSelected, this);
 }
 
-var TodosContainerConstructorPrototype = TodosContainerConstructor.prototype;
+extendConstructor(TodoActionsBarConstructor, Eventable);
 
-TodosContainerConstructorPrototype.render = function (currentModel) {
-    console.log(currentModel);
-    AddTodos.setVisibility(currentModel.todosArray.length);
-    TodosList.render(currentModel);
-    TodosBar.render(currentModel.todosArray, currentModel.currentFilter);
+var todoActionsBarConstructorPrototype = TodoActionsBarConstructor.prototype;
+
+todoActionsBarConstructorPrototype._onFilterSelected = function (filterId) {
+    this.trigger('filterSelected', filterId);
 };
 
-module.exports = TodosContainerConstructor;
+/**
+ * @return {TodoActionsBarConstructor}
+ * @private
+ */
+todoActionsBarConstructorPrototype._clearCompleted = function () {
+    this.trigger('clearCompleted');
+    return this;
+};
 
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
+/**
+ * @param {Number} count
+ * @return {TodoActionsBarConstructor}
+ */
+todoActionsBarConstructorPrototype.setItemsCount = function (count) {
+    this._counterNodeText.nodeValue = count + ' ' + l10n.plural('todosCountLabel', count);
+    return this;
+};
 
-var Observable = __webpack_require__(0);
-var AddTodos = __webpack_require__(3);
-var ActionsTypes =__webpack_require__(1);
-
-function AddTodosToModel() {
-    this.getNewModelState.subscribe(AddTodos.onChange);
-}
-
-var addTodosToModelPrototype = AddTodosToModel.prototype;
-
-addTodosToModelPrototype.model = __webpack_require__(2);
-
-addTodosToModelPrototype.onUpdateModel = new Observable();
-
-addTodosToModelPrototype.getNewModelState = function(value) {
-    if (value.type.localeCompare(ActionsTypes.ADD_TODOS) == 0) {
-        var currentModel = addTodosToModelPrototype.model.addTodos({
-            "todosItem": {
-                "id": value.id,
-                "text": value.text,
-                "completed": false
-            }
-        });
-
-        addTodosToModelPrototype.onUpdateModel.deliver(currentModel);
-
-        currentModel = null;
+/**
+ * @param {Event} e
+ */
+todoActionsBarConstructorPrototype.handleEvent = function (e) {
+    switch (e.type) {
+        case 'click':
+            this._clearCompleted();
+            break;
     }
 };
 
-module.exports = new AddTodosToModel();
+module.exports = TodoActionsBarConstructor;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+/**
+ * @param {HTMLElement} node
+ * @return {Node}
+ */
+function getTextNode(node) {
+    var childs = node.childNodes;
+    var i = 0;
+    var l = childs.length;
+
+    for (; i !== l; i += 1) {
+        if (childs[i].nodeName === '#text') {
+            return childs[i];
+        }
+    }
+
+    var result = document.createTextNode('');
+    node.appendChild(result);
+    return result;
+}
+
+module.exports = getTextNode;
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Observable = __webpack_require__(0);
-var AddTodos = __webpack_require__(3);
-var ActionsTypes =__webpack_require__(1);
+var Eventable = __webpack_require__(1);
+var extendConstructor = __webpack_require__(0);
 
-function MakeAllCompletedTodosToModel() {
-    this.getNewModelState.subscribe(AddTodos.onChange)
-}
+var ACTIVE_FILTER_MODIFICATOR = '__active';
 
-var makeAllCompletedTodosToModelPrototype
-    = MakeAllCompletedTodosToModel.prototype;
+/**
+ * @param {HTMLElement} domRoot
+ * @constructor
+ * @implements {EventListener}
+ */
+function FilterConstructor(domRoot) {
+    this._initEventable();
 
-makeAllCompletedTodosToModelPrototype.model = __webpack_require__(2);
+    var filters = this._filters = domRoot.querySelectorAll('.filter');
+    this._currentActive = null;
 
-makeAllCompletedTodosToModelPrototype.onUpdateModel = new Observable();
-
-makeAllCompletedTodosToModelPrototype.getNewModelState = function(value) {
-    if (value.type.localeCompare(ActionsTypes.MAKE_ALL_COMPLETED_TODOS) == 0) {
-        var currentModel = makeAllCompletedTodosToModelPrototype.model.makeAllCompleted();
-
-        makeAllCompletedTodosToModelPrototype.onUpdateModel.deliver(currentModel);
-
-        currentModel = null;
-    }
-};
-
-module.exports = new MakeAllCompletedTodosToModel();
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Observable = __webpack_require__(0);
-var TodosList = __webpack_require__(4);
-var ActionsTypes =__webpack_require__(1);
-
-function ToggleTodosToModel() {
-    this.getNewModelState.subscribe(TodosList.onChange);
-}
-
-var toggleTodosToModelPrototype = ToggleTodosToModel.prototype;
-
-toggleTodosToModelPrototype.model = __webpack_require__(2);
-
-toggleTodosToModelPrototype.onUpdateModel = new Observable();
-
-toggleTodosToModelPrototype.getNewModelState = function(value) {
-    if (value.type.localeCompare(ActionsTypes.TOGGLE_TODOS) == 0) {
-        var currentModel = toggleTodosToModelPrototype.model.toggleItem(value.id);
-        toggleTodosToModelPrototype.onUpdateModel.deliver(currentModel);
-
-        currentModel = null;
-    }
-};
-
-module.exports = new ToggleTodosToModel();
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var FilterTypes = __webpack_require__(5);
-
-function TodosItemConstructor() {}
-
-function setVisibility(currentFilter, completed) {
-    switch (currentFilter) {
-        case FilterTypes.FILTER_ALL: {
-            return "block"
-        } break;
-
-        case FilterTypes.FILTER_ACTIVE: {
-            return (completed) ?
-                  "none" : "block"
-        } break;
-
-        case FilterTypes.FILTER_COMPLETED : {
-            return (!completed) ?
-                "none" : "block"
-        } break;
-
-        default: {
-            return {
-                display: "block"
-            };
+    for (var i = filters.length; i-- ;) {
+        filters[i].addEventListener('click', this);
+        if (filters[i].classList.contains(ACTIVE_FILTER_MODIFICATOR)) {
+            this._currentActive = filters[i];
         }
     }
 }
 
-var todosItemConstructorPrototype = TodosItemConstructor.prototype;
+extendConstructor(FilterConstructor, Eventable);
 
-todosItemConstructorPrototype.update = function (props, currentFilter, TodosItemNode) {
-    TodosItemNode.className = (!props.completed)
-        ? "todos-item":
-        "todos-item __done";
+var filterConstructorPrototype = FilterConstructor.prototype;
 
-    TodosItemNode.style.display = setVisibility(currentFilter, props.completed);
-
-    TodosItemNode.childNodes[0].className = (!props.completed)
-        ? "todos-item_undone-mark-w todos-item_belonging-checkbox":
-        "todos-item_done-mark-w todos-item_belonging-checkbox";
-
-    TodosItemNode.childNodes[0].childNodes[0].className = (!props.completed)
-        ? "todos-item_undone-mark-icon":
-        "todos-item_done-mark-icon";
-
-    TodosItemNode.childNodes[0].childNodes[1].className = (!props.completed)
-        ? "todos-item_undone-mark":
-        "todos-item_done-mark";
-
-    if (!props.completed) {
-        TodosItemNode.childNodes[0].childNodes[1].removeAttribute("checked");
-        TodosItemNode.childNodes[0].childNodes[1].setAttribute("aria-label", "mark undone");
-    } else {
-        TodosItemNode.childNodes[0].childNodes[1].setAttribute("checked", "checked");
-        TodosItemNode.childNodes[0].childNodes[1].setAttribute("aria-label", "mark done");
+/**
+ * @param {HTMLElement} filterElement
+ * @return {FilterConstructor}
+ * @private
+ */
+filterConstructorPrototype._setFilter = function (filterElement) {
+    if (this._currentActive !== filterElement) {
+        this._currentActive.classList.remove(ACTIVE_FILTER_MODIFICATOR);
+        filterElement.classList.add(ACTIVE_FILTER_MODIFICATOR);
+        this._currentActive = filterElement;
+        this.trigger('filterSelected', filterElement.getAttribute('data-filter'));
     }
-
+    return this;
 };
 
-todosItemConstructorPrototype.render = function(props, currentFilter) {
-    var newListEl = document.createElement("div");
-
-    newListEl.className = (!props.completed)
-        ? "todos-item":
-        "todos-item __done";
-
-    newListEl.setAttribute("id", props.id);
-
-    newListEl.style.display = setVisibility(currentFilter, props.completed);
-
-    /**
-     * first child
-     */
-    var newListElChild = document.createElement("div");
-    newListElChild.className = (!props.completed)
-        ? "todos-item_undone-mark-w todos-item_belonging-checkbox":
-        "todos-item_done-mark-w todos-item_belonging-checkbox";
-
-    //1 child of first child
-    var newListElChildChild = document.createElement("div");
-    newListElChildChild.className = (!props.completed)
-        ? "todos-item_undone-mark-icon":
-        "todos-item_done-mark-icon";
-    newListElChild.appendChild(newListElChildChild);
-
-    //2 child of first child
-    newListElChildChild = document.createElement("input");
-    newListElChildChild.className = (!props.completed)
-        ? "todos-item_undone-mark":
-        "todos-item_done-mark";
-    newListElChildChild.setAttribute("type", "checkbox");
-    if (!props.completed) {
-        newListElChildChild.removeAttribute("checked");
-        newListElChildChild.setAttribute("aria-label", "mark undone");
-    } else {
-        newListElChildChild.setAttribute("checked", "checked");
-        newListElChildChild.setAttribute("aria-label", "mark done");
-    }
-
-    newListElChild.appendChild(newListElChildChild);
-
-    newListEl.appendChild(newListElChild);
-
-    /**
-     * Second child
-     */
-    newListElChild = document.createElement("div");
-    newListElChild.className = "todos-item_delete-w";
-
-    //1 of second child
-    newListElChildChild = document.createElement("div");
-    newListElChildChild.className = "todos-item_delete_icon";
-    newListElChild.appendChild(newListElChildChild);
-
-    //2 of second child
-    newListElChildChild = document.createElement("button");
-    newListElChildChild.className = "todos-item_delete";
-    newListElChildChild.setAttribute("aria-label", "delete item");
-    newListElChild.appendChild(newListElChildChild);
-
-    newListEl.appendChild(newListElChild);
-
-    /**
-     * Third child
-     */
-    newListElChild = document.createElement("div");
-    newListElChild.className = "todos-item_name-w";
-
-    //1 of third child
-    newListElChildChild = document.createElement("textarea");
-    newListElChildChild.className = "todos-item_name";
-    newListElChildChild.value = props.text;
-    newListElChild.appendChild(newListElChildChild);
-
-    newListEl.appendChild(newListElChild);
-
-    return newListEl;
-
-};
-
-
-module.exports = new TodosItemConstructor();
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Observable = __webpack_require__(0);
-var TodosList = __webpack_require__(4);
-var ActionsTypes =__webpack_require__(1);
-
-function DeleteTodosToModel() {
-    this.getNewModelState.subscribe(TodosList.onChange);
-}
-
-var deleteTodosToModelPrototype = DeleteTodosToModel.prototype;
-
-deleteTodosToModelPrototype.model = __webpack_require__(2);
-
-deleteTodosToModelPrototype.onUpdateModel = new Observable();
-
-deleteTodosToModelPrototype.getNewModelState = function(value) {
-    if (value.type.localeCompare(ActionsTypes.DELETE_TODOS) == 0) {
-        var currentModel = deleteTodosToModelPrototype.model.deleteItem(value.id);
-        deleteTodosToModelPrototype.onUpdateModel.deliver(currentModel);
-
-        currentModel = null;
+filterConstructorPrototype.handleEvent = function (e) {
+    switch (e.type) {
+        case 'click':
+            this._setFilter(e.target);
+            break;
     }
 };
 
-module.exports = new DeleteTodosToModel();
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Observable = __webpack_require__(0);
-var TodosFilters = __webpack_require__(6);
-var ActionsTypes =__webpack_require__(1);
-
-function SetTodosFilterToModel() {
-    this.getNewModelState.subscribe(TodosFilters.onChange);
-}
-
-var setTodosFilterToModelPrototype = SetTodosFilterToModel.prototype;
-
-setTodosFilterToModelPrototype.model = __webpack_require__(2);
-
-setTodosFilterToModelPrototype.onUpdateModel = new Observable();
-
-setTodosFilterToModelPrototype.getNewModelState = function(value) {
-    if (value.type.localeCompare(ActionsTypes.SET_VISIBILITY_FILTER) == 0) {
-        var currentModel = setTodosFilterToModelPrototype.model.addTodos({
-            "todo-Bottom-Filter": value.filter
-        });
-        setTodosFilterToModelPrototype.onUpdateModel.deliver(currentModel);
-
-        currentModel = null;
-    }
-};
-
-module.exports = new SetTodosFilterToModel();
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Observable = __webpack_require__(0);
-var TodosDeleteAllCompletedButton = __webpack_require__(17);
-var ActionsTypes =__webpack_require__(1);
-
-function DeleteAllCompletedTodosToModel() {
-    this.getNewModelState.subscribe(TodosDeleteAllCompletedButton.onChange)
-}
-
-var deleteAllCompletedTodosToModelPrototype = DeleteAllCompletedTodosToModel.prototype;
-
-deleteAllCompletedTodosToModelPrototype.model = __webpack_require__(2);
-
-deleteAllCompletedTodosToModelPrototype.onUpdateModel = new Observable();
-
-deleteAllCompletedTodosToModelPrototype.getNewModelState = function(value) {
-    if (value.type.localeCompare(ActionsTypes.DELETE_ALL_COMPLETED_TODOS) == 0) {
-        var currentModel = deleteAllCompletedTodosToModelPrototype.model.deleteAllCompletedItems();
-
-        deleteAllCompletedTodosToModelPrototype.onUpdateModel.deliver(currentModel);
-
-        currentModel = null;
-    }
-};
-
-module.exports = new DeleteAllCompletedTodosToModel();
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var Observable = __webpack_require__(0);
-var ActionsTypes = __webpack_require__(1);
-
-var TODOS_DELETE_ALL_COMPLETED_BUTTON = "todo-Bottom-clear-Done-button";
-
-function TodosDeleteAllCompletedConstructor() {
-    if(this.todosDelButton)
-        this.todosDelButton.addEventListener('click', this.handlerClick);
-}
-
-var todosDeleteAllCompletedConstructorPrototype =
-    TodosDeleteAllCompletedConstructor.prototype;
-
-todosDeleteAllCompletedConstructorPrototype.todosDelButton =
-    document.getElementsByClassName(TODOS_DELETE_ALL_COMPLETED_BUTTON)[0];
-
-todosDeleteAllCompletedConstructorPrototype.onChange = new Observable();
-
-todosDeleteAllCompletedConstructorPrototype.handlerClick = function (event) {
-    if (event.target.className.
-        localeCompare(TODOS_DELETE_ALL_COMPLETED_BUTTON) === 0) {
-        todosDeleteAllCompletedConstructorPrototype.onChange.deliver({
-            "type": ActionsTypes.DELETE_ALL_COMPLETED_TODOS
-        });
-    }
-};
-
-module.exports = new TodosDeleteAllCompletedConstructor();
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var TodosFilters = __webpack_require__(6);
-var TodosCounter = __webpack_require__(19);
-
-var TODOS_BAR = ".todo-Bottom";
-
-function TodosBarConstructor() {
-}
-
-var todosBarConstructorPrototype = TodosBarConstructor.prototype;
-
-todosBarConstructorPrototype.todoBar = document.querySelector(TODOS_BAR);
-
-todosBarConstructorPrototype.setVisibility = function (num) {
-    if (num == 0) {
-        todosBarConstructorPrototype.todoBar.style.display = "none"
-    } else {
-        todosBarConstructorPrototype.todoBar.style.display = "flex"
-    }
-};
-
-todosBarConstructorPrototype.render = function (todosArray, currentFilter) {
-    todosBarConstructorPrototype.setVisibility(todosArray.length);
-    TodosFilters.render(currentFilter);
-    TodosCounter.render(todosArray);
-};
-
-module.exports = new TodosBarConstructor();
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports) {
-
-function TodosCounterConstructor() {
-}
-
-TodosCounterConstructor.prototype.getNumOfActiveItems = function(todosArray) {
-    var num = 0;
-
-    for (var i = 0; i < todosArray.length; i++) {
-        if (!todosArray[i].completed) {
-            num++;
-        }
-    }
-
-    return num + " items left";
-};
-
-TodosCounterConstructor.prototype.render = function (todosArray) {
-    document.querySelector(".todo-Bottom-left-Items").innerHTML = this.getNumOfActiveItems(todosArray)
-};
-
-module.exports = new TodosCounterConstructor();
+module.exports = FilterConstructor;
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map

@@ -1,12 +1,9 @@
-var addTodosToModel = require('../modules/view-models/AddTodosToModel');
-var makeAllCompletedTodosToModel = require(
-    '../modules/view-models/MakeAllCompletedTodosToModel');
-var toggleTodosToModel = require('../modules/view-models/ToggleTodosToModel');
-var deleteTodosToModel = require('../modules/view-models/DeleteTodosToModel');
-var setTodosFilterToModel = require(
-    '../modules/view-models/SetTodosFilterToModel');
-var deleteAllCompletedTodosToModel = require(
-    '../modules/view-models/DeleteAllCompletedTodosToModel');
+var addTodosToModel = require('../models/view-models/AddTodosToModel');
+var makeAllCompletedTodosToModel = require('../models/view-models/MakeAllCompletedTodosToModel');
+var toggleTodosToModel = require('../models/view-models/ToggleTodosToModel');
+var deleteTodosToModel = require('../models/view-models/DeleteTodosToModel');
+var setTodosFilterToModel = require('../models/view-models/SetTodosFilterToModel');
+var deleteAllCompletedTodosToModel = require('../models/view-models/DeleteAllCompletedTodosToModel');
 
 var AddTodos = require('./add-todos/AddTodos');
 var TodosList = require('./todos_list/TodosList');

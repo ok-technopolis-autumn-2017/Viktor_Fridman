@@ -1,11 +1,13 @@
+
+
 function DataStorageConstructor() {}
 
 var dataStorageConstructorPrototype = DataStorageConstructor.prototype;
 
 dataStorageConstructorPrototype.quotaTry
-    = function() {
+    = function(structure) {
     try {
-        localStorage.setItem("todos", JSON.stringify(todosStructure));
+        localStorage.setItem("todos", JSON.stringify(structure));
     } catch (e) {
         if (e == QUOTA_EXCEEDED_ERR) {
             alert('Sorry')
@@ -43,7 +45,7 @@ dataStorageConstructorPrototype.setLocalStorage = function (value) {
         }
     }
 
-    dataStorageConstructorPrototype.quotaTry();
+    dataStorageConstructorPrototype.quotaTry(structure);
 
     structure = null;
 };
@@ -66,7 +68,7 @@ dataStorageConstructorPrototype.makeAllCompletedLocalStorage = function () {
         }
     });
 
-    dataStorageConstructorPrototype.quotaTry();
+    dataStorageConstructorPrototype.quotaTry(structure);
 
     structure = null;
 };
@@ -86,7 +88,7 @@ dataStorageConstructorPrototype.toggleTodosLocalStorage = function(id) {
         return todosItem
     });
 
-    dataStorageConstructorPrototype.quotaTry();
+    dataStorageConstructorPrototype.quotaTry(structure);
     structure = null;
 };
 
@@ -99,7 +101,7 @@ dataStorageConstructorPrototype.deleteTodosLocalStorage = function(id) {
 
     });
 
-    dataStorageConstructorPrototype.quotaTry();
+    dataStorageConstructorPrototype.quotaTry(structure);
 
     structure = null;
 };
@@ -115,7 +117,7 @@ dataStorageConstructorPrototype.deleteAllCompletedTodosLocalStorage
 
     });
 
-    dataStorageConstructorPrototype.quotaTry();
+    dataStorageConstructorPrototype.quotaTry(structure);
     structure = null;
 };
 

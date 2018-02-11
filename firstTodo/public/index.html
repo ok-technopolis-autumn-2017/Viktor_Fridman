@@ -13,108 +13,74 @@
 
 </head>
 
-<body>
+<script type="text/html" id="todoItemTemplate">
+    <div class="todo-item">
+        <div class="input-checkbox todo-item_ready-checker">
+            <div class="todos-item_undone-mark-icon"></div>
+            <input type="checkbox" class="todos-item_undone-mark-w js-todo-item_mark-ready" aria-label="check item as undone" />
+
+        </div>
+
+        <div class="action todo-item_remove-action">
+            <div class="todos-item_delete_icon"></div>
+            <button class="action-remove js-todo-item_remove-action" aria-label="delete item" id="delete_button"></button>
+        </div>
+
+        <div class="todo-item_text-w">
+            <div class="todo-item_text js-todo-item_text" contenteditable="true"></div>
+        </div>
+    </div>
+</script>
+
+<body class = "hover">
 <div class="todos-main-wrapper" align="center">
     <div class="todo-header">
-        <h1 class="main-title1" align="Left" aria-label="todo0"> <!-- fontcolor="#ff0000" -->
+        <h1 class="main-title1" align="Left" aria-label="first title">
             Todo
         </h1>
 
-        <h3 class="main-title2" align="center" aria-label="todo1"> <!--font color="#ffff00"-->
+        <h3 class="main-title2" align="center" aria-label="second title">
             Todo
         </h3>
 
-        <h5 class="main-title3" align="right" aria-label="todo2"> <!--font color="#00ffff"-->
+        <h5 class="main-title3" align="right" aria-label="third title">
             Todo-Todo-Todo...
         </h5>
 
     </div>
 
-    <div class="main-Body" role="main" >
+    <div class="main-Body js-main-Body" role="main" >
         <div class = "add-And-Select">
-
-            <button class="select-All" aria-label="selectAllTodoItems">
-                <div class="select-All-icon"></div>
-            </button>
-            <!--<script>-->
-            <!--document.addEventListener('DOMContentLoaded', function () {-->
-            <!--var selectElement = document.getElementsByClassName('select-All')[0];-->
-            <!--selectElement.addEventListener('click', function () {-->
-            <!--selectAll();-->
-            <!--});-->
-            <!--});-->
-            <!--</script>-->
+            <div class = "selector-button todo-add_select-all-action">
+                <button class="select-All js-todos-select-all" aria-label="select all items as done">
+                    <div class="select-All-icon"></div>
+                </button>
+            </div>
 
             <div class="adder">
-                <input class="todo-add_input" type="text" placeholder="What needs to be done?" aria-label="addTodoItems" id="addStringTodos">
-                <!--<script>-->
-                <!--document.addEventListener('DOMContentLoaded', function () {-->
-
-                <!--var addString = document.getElementsByClassName("todo-add_input")[0];-->
-                <!--addString.addEventListener('keypress', function() {-->
-                <!--addElement(event);-->
-                <!--});-->
-                <!--});-->
-                <!--</script>-->
+                <input class="todo-add_input js-todos-todo-input" type="text" placeholder="What needs to be done?" aria-label="input new item" id="addStringTodos">
             </div>
             <!--<div class="todo-List-Bottomborder"></div>-->
         </div>
 
-        <div class="todo-List">
+        <div class="todo-List js-todo-List">
         </div>
 
         <div class="todo-Bottom">
-            <div class="todo-Bottom-left-Items" aria-label="Undone items">
+            <div class="todo-Bottom-left-Items js-todo-Bottom-left-Items" aria-label="undone items counter">
                 0 items left
             </div>
 
-            <div class="todo-Bottom-item-Filter" aria-label="Todo filter">
-
-                <button class="todo-Bottom-Filter __all" name="itemFilter_All" aria-label="All"> All</button>
-                <!--<script>-->
-                <!--document.addEventListener('DOMContentLoaded', function () {-->
-                <!--var filterAllElement = document.getElementsByClassName('todo-Bottom-Filter-all-Items')[0];-->
-                <!--filterAllElement.addEventListener('click', function () {-->
-                <!--filterAll();-->
-                <!--});-->
-                <!--});-->
-                <!--</script>-->
-
-                <button class="todo-Bottom-Filter __active" name="itemFilter_Active" aria-label="Active"> Active</button>
-                <!--<script>-->
-                <!--document.addEventListener('DOMContentLoaded', function () {-->
-                <!--var filterActiveElement = document.getElementsByClassName('todo-Bottom-Filter-active-Items')[0];-->
-                <!--filterActiveElement.addEventListener('click', function () {-->
-                <!--filterActive();-->
-                <!--});-->
-                <!--});-->
-                <!--</script>-->
-
-                <button class="todo-Bottom-Filter __completed" name="itemFilter_Completed" aria-label="Completed"> Completed</button>
-                <!--<script>-->
-                <!--document.addEventListener('DOMContentLoaded', function () {-->
-                <!--var filterCompletedElement = document.getElementsByClassName('todo-Bottom-Filter-Completed-Items')[0];-->
-                <!--filterCompletedElement.addEventListener('click', function () {-->
-                <!--filterCompleted();-->
-                <!--});-->
-                <!--});-->
-                <!--</script>-->
+            <div class="todo-Bottom-item-Filter js-todo-Bottom_filter" aria-label="filter block">
+                <button class="todo-Bottom-Filter __all" name="itemFilter_All" aria-label="filter all items"> All</button>
+                <button class="todo-Bottom-Filter __active" name="itemFilter_Active" aria-label="filter active items"> Active</button>
+                <button class="todo-Bottom-Filter __completed" name="itemFilter_Completed" aria-label="filter completed items"> Completed</button>
             </div>
 
             <div class="todo-Bottom-clear-Done">
-                <button class="todo-Bottom-clear-Done-button" aria-label="clearDone">Clear done</button>
-                <!--<script>-->
-                <!--document.addEventListener('DOMContentLoaded', function () {-->
-                <!--var clearCompletedElement = document.getElementsByClassName('todo-Bottom-clear-Done')[0];-->
-                <!--clearCompletedElement.addEventListener('click', function () {-->
-                <!--clearCompleted();-->
-                <!--});-->
-                <!--});-->
-                <!--</script>-->
+                <button class="todo-Bottom-clear-Done-button js-todo-Bottom-clear-Done-button" aria-label="clear all done items">Clear done</button>
             </div>
-
         </div>
-
     </div>
 </div>
 </body>

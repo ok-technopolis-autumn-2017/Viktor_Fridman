@@ -39,7 +39,7 @@ input,
 select,
 button {
   color: #d6d6d6;
-  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", "Adobe Caslon Pro", sans-serif;
 }
 
 body {
@@ -265,26 +265,16 @@ body {
   border-top: 1px solid #efefef;
 }
 
-.todo-item:before,
-.todo-item:after {
-  content: '';
-  display: table;
-}
-
-.todo-item:after {
-  clear: both;
-}
-
 .todo-item:hover {
   background: #fafafa;
 }
 
-.todo-item_name-w {
+.todo-item_text-w {
   overflow: hidden;
   height: 64px;
 }
 
-.todo-item_name {
+.todo-item_text {
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
@@ -301,15 +291,16 @@ body {
   margin-bottom: 0;
 }
 
-.__done > .todo-item_name-w > .todo-item_name {
+.__ready > .todo-item_text-w > .todo-item_text {
   text-decoration: line-through;
 }
 
-.todo-item_belonging-checkbox {
+.todo-item_ready-checker {
   float: left;
 }
 
-.todo-item_delete-w {
+.todo-item_remove-action,
+.action-remove {
   width: 64px;
   height: 64px;
   background: none;
@@ -318,22 +309,6 @@ body {
   float: right;
   position: relative;
   opacity: 1;
-}
-
-.todo-item_delete {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  width: 64px;
-  height: 64px;
-  cursor: pointer;
-  position: absolute;
-  opacity: 0;
-}
-
-.todo-item_delete-w:hover {
-  filter: brightness(0);
 }
 
 .todo-item:hover .todos-item_delete_icon {
@@ -347,45 +322,56 @@ body {
   opacity: 300;
 }
 
-.todos-item_done-mark-w,
-.todos-item_undone-mark-w {
+.input-checkbox {
   width: 40px;
   height: 40px;
   background: none;
-  border: none;
   padding: 0;
   margin: 12px;
   border-radius: 4em;
   position: relative;
-  opacity: 1;
-}
-
-.todos-item_done-mark-w {
-  border: 2px solid #67c5b3;
-  opacity: 1;
-}
-
-.todos-item_undone-mark-w {
   border: 2px solid #efefef;
   opacity: 1;
 }
 
-.todos-item_done-mark,
-.todos-item_undone-mark {
-  position: absolute;
-  left: 25%;
-  top: 25%;
-  transform: scale(4);
-  opacity: 0;
+.__ready > .input-checkbox {
+  border: 2px solid #67c5b3;
+  opacity: 1;
+  width: 40px;
+  height: 40px;
   background: none;
-  border: none;
-  cursor: pointer;
+  padding: 0;
+  margin: 12px;
+  border-radius: 4em;
+  position: relative;
+}
+
+.todos-item_undone-mark-w {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 50%;
+  top: 50%;
+  margin-left: -20px;
+  margin-top: -20px;
+  opacity: 0;
+}
+
+.__ready > .input-checkbox > .todos-item_undone-mark-w {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 50%;
+  top: 50%;
+  margin-left: -20px;
+  margin-top: -20px;
+  opacity: 0;
 }
 
 .todos-item_undone-mark-icon {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 25px;
+  height: 25px;
   left: 50%;
   top: 50%;
   margin-left: -10px;
@@ -393,10 +379,10 @@ body {
   opacity: 300;
 }
 
-.todos-item_done-mark-icon {
+.__ready > .todos-item_undone-mark-icon {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 25px;
+  height: 25px;
   background: url("../images/icons/completed.png") no-repeat 0 0;
   left: 50%;
   top: 50%;
@@ -485,64 +471,6 @@ body {
 .__empty:before,
 .__empty:after {
   display: none;
-}
-
-.todos-item_done-mark-w,
-.todos-item_undone-mark-w {
-  width: 40px;
-  height: 40px;
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 12px;
-  border-radius: 4em;
-  position: relative;
-  opacity: 1;
-}
-
-.todos-item_done-mark-w {
-  border: 2px solid #67c5b3;
-  opacity: 1;
-}
-
-.todos-item_undone-mark-w {
-  border: 2px solid #efefef;
-  opacity: 1;
-}
-
-.todos-item_done-mark,
-.todos-item_undone-mark {
-  position: absolute;
-  left: 25%;
-  top: 25%;
-  transform: scale(4);
-  opacity: -10;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.todos-item_undone-mark-icon {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  left: 50%;
-  top: 50%;
-  margin-left: -10px;
-  margin-top: -10px;
-  opacity: 300;
-}
-
-.todos-item_done-mark-icon {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background: url("../images/icons/completed.png") no-repeat 0 0;
-  left: 50%;
-  top: 50%;
-  margin-left: -10px;
-  margin-top: -10px;
-  opacity: 300;
 }
 
 .todo-Bottom-Filter {
