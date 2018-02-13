@@ -376,29 +376,6 @@ body {
 
 /* мухахаха */
 
-.todo-Bottom-Filter {
-  font-size: 16px;
-  color: #d6d6d6;
-  padding: 0;
-  padding-left: 3px;
-  padding-right: 3px;
-  margin: 0;
-  box-sizing: border-box;
-  border: 2px solid #fff;
-  border-radius: 2px;
-  background: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.todo-Bottom-Filter:hover,
-.todo-Bottom-Filter:focus {
-  border: 2px solid #efefef;
-  border-radius: 2px;
-}
-
-/* мухахаха */
-
 .todo-Bottom-clear-Done {
   height: 24px;
   margin: 12px;
@@ -432,6 +409,8 @@ body {
 .__empty:after {
   display: none;
 }
+
+/* мухахаха */
 
 .todo-Bottom-Filter {
   font-size: 16px;
