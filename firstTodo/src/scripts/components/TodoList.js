@@ -40,7 +40,7 @@ todoListConstructorPrototype.getItemsCount =function () {
 todoListConstructorPrototype.createItem = function (todoItemData) {
     var item = new TodoItem(Object.assign(
         {
-            id: itemsIdIterator++,
+            id: itemsIdIterator++
         },
         todoItemData
     ));
@@ -133,17 +133,17 @@ todoListConstructorPrototype.setFilter = function (filterId) {
 todoListConstructorPrototype.filterShowedItems = function (filterId) {
     this._items.forEach(function (item) {
         switch (filterId) {
-            case 'all':
+            case 'itemFilter_All':
                 item.show();
                 break;
-            case 'ready':
+            case 'itemFilter_Completed':
                 if (item.model.isReady) {
                     item.show();
                 } else {
                     item.hide();
                 }
                 break;
-            case 'unready':
+            case 'itemFilter_Active':
                 if (!item.model.isReady) {
                     item.show();
                 } else {
