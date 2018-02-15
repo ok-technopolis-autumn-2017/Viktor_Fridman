@@ -27,16 +27,16 @@
   position: relative;
 }
 
-.select-All:hover,
-.select-All:focus {
-  background: #f9f9f9;
-  border: none;
-}
+  .select-All:hover,
+  .select-All:focus {
+    background: $c-white-light;
+    border: none;
+  }
 
 .select-All-icon {
   width: 24px;
   height: 12px;
-  background: url("../../../images/icons/select-all.png") no-repeat 0 0;
+  background: $pic-select-all no-repeat 0 0;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -53,19 +53,17 @@
   box-sizing: border-box;
   border: 0;
   background: none;
-  color: #666;
+  color: $c-black-light;
   display: inline-block;
   line-height: 24px;
-  padding: 0;
-  padding-right: 12px;
+  padding: 0 12px 0 0;
   margin-top: 16px;
   outline: none;
-  font-size: 24px;
+  font-size: $fs_large;
   height: 30px;
 }
 
 .todo-add_input::placeholder {
-  color: #ccc;
+  color: $c-gray-light-light;
   font-style: italic;
-  font-size: 24px;
 }

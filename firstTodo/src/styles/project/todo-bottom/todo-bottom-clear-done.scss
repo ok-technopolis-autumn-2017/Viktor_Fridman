@@ -7,12 +7,12 @@
 
 .todo-Bottom-clear-Done-button {
   display: inline;
-  padding: 0px;
-  margin: 0px;
-  font-size: 16px;
-  color: #d6d6d6;
+  padding: 0;
+  margin: 0;
+  font-size: $fs_normal;
+  color: $c-gray-dark;
   box-sizing: border-box;
-  border: 2px solid #fff;
+  border: 2px solid $c-white;
   border-radius: 2px;
   cursor: pointer;
   background: none;
@@ -21,7 +21,7 @@
 
 .todo-Bottom-clear-Done-button:hover,
 .todo-Bottom-clear-Done-button:focus {
-  border: 2px solid #efefef;
+  border: 2px solid $border-color;
   border-radius: 2px;
 }
 

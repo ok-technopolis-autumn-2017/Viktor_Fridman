@@ -2,16 +2,16 @@
 
 @import "base";
 
-@import "project/header/todoHeaderTitles";
-@import "project/body/mainBody";
-@import "project/body/mainWrapper";
-@import "project/addAndSelect/addAndSelect";
-@import "project/todoList/todoListBottomborder";
-@import "project/todoList/todoList";
-@import "project/todoList/todoItem";
-@import "project/todoBottom/todoBottom";
-@import "project/todoBottom/todoBottomClearDone";
-@import "project/todoList/todoEmpty";
+@import "project/todo-header/todo-header-titles";
+@import "project/todo-body/todo-main-body";
+@import "project/todo-body/todo-main-wrapper";
+@import "project/addAndSelect/todo-add-and-select";
+@import "project/todo-list/todo-list-bottom-border";
+@import "project/todo-list/todo-list";
+@import "project/todo-list/todo-item";
+@import "project/todo-bottom/todo-bottom";
+@import "project/todo-bottom/todo-bottom-clear-done";
+@import "project/todo-list/todo-empty";
 @import "base/todos-filter";
 @import "base/action";
 

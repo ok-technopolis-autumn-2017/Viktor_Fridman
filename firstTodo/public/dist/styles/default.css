@@ -7,13 +7,13 @@
 
 html,
 body {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 textarea,
 input,
 select {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 body,
@@ -116,14 +116,6 @@ body {
   text-align: center;
 }
 
-.todo-header {
-  font-size: 100px;
-  font-weight: 100;
-  color: rgba(175, 47, 47, 0.15);
-  text-align: center;
-  margin: 0 20px;
-}
-
 /* мухахаха */
 
 .main-Body {
@@ -156,7 +148,7 @@ body {
 }
 
 body {
-  background-color: #f5f5f5;
+  background-color: #f5f5f4;
 }
 
 /* мухахаха */
@@ -226,8 +218,7 @@ body {
   color: #666;
   display: inline-block;
   line-height: 24px;
-  padding: 0;
-  padding-right: 12px;
+  padding: 0 12px 0 0;
   margin-top: 16px;
   outline: none;
   font-size: 24px;
@@ -235,14 +226,13 @@ body {
 }
 
 .todo-add_input::placeholder {
-  color: #ccc;
+  color: #cccccc;
   font-style: italic;
-  font-size: 24px;
 }
 
 /* мухахаха */
 
-.todo-List-Bottomborder {
+.todo-List-Bottom-border {
   width: 100%;
   border-top: 1px solid rgba(230, 230, 230, 0.2);
 }
@@ -311,14 +301,10 @@ body {
   opacity: 1;
 }
 
-.todo-item:hover .todos-item_delete_icon {
-  width: 24px;
-  height: 24px;
-  background: url("../images/icons/close.png") no-repeat 0 0;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -6px -12px;
+.todo-item:hover .action-remove {
+  width: 64px;
+  height: 64px;
+  background: url("../images/icons/close.png") no-repeat center;
   opacity: 300;
 }
 
@@ -335,7 +321,7 @@ body {
   opacity: 1;
 }
 
-.__ready > .input-checkbox {
+.todo-item.__ready .input-checkbox {
   border: 2px solid #67c5b3;
   background: url("../images/icons/completed.png") no-repeat center;
 }
@@ -369,11 +355,6 @@ body {
   height: 24px;
 }
 
-.todo-Bottom-item-Filter {
-  height: 24px;
-  margin: 12px;
-}
-
 /* мухахаха */
 
 .todo-Bottom-clear-Done {
@@ -383,8 +364,8 @@ body {
 
 .todo-Bottom-clear-Done-button {
   display: inline;
-  padding: 0px;
-  margin: 0px;
+  padding: 0;
+  margin: 0;
   font-size: 16px;
   color: #d6d6d6;
   box-sizing: border-box;
@@ -415,9 +396,7 @@ body {
 .todo-Bottom-Filter {
   font-size: 16px;
   color: #d6d6d6;
-  padding: 0;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding: 0 3px;
   margin: 0;
   box-sizing: border-box;
   border: 2px solid #fff;
@@ -427,32 +406,44 @@ body {
   cursor: pointer;
 }
 
-.todo-Bottom-Filter:hover,
-.todo-Bottom-Filter:focus {
+.todo-Bottom-Filter:hover {
   border: 2px solid #efefef;
   border-radius: 2px;
+}
+
+.todo-Bottom-Filter.__active {
+  border: 2px solid #efefef;
+  border-radius: 2px;
+  background: #bbffbb;
+}
+
+.todo-Bottom-item-Filter {
+  height: 24px;
+  margin: 12px;
 }
 
 /* мухахаха */
 
-.todo-Bottom-Filter {
-  font-size: 16px;
-  color: #d6d6d6;
-  padding: 0;
-  padding-left: 3px;
-  padding-right: 3px;
-  margin: 0;
-  box-sizing: border-box;
-  border: 2px solid #fff;
-  border-radius: 2px;
-  background: none;
-  outline: none;
-  cursor: pointer;
+.action {
+  position: relative;
+  display: inline-block;
 }
 
-.todo-Bottom-Filter:hover,
-.todo-Bottom-Filter:focus {
-  border: 2px solid #efefef;
-  border-radius: 2px;
+.action-remove {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+button.select-All,
+input.select-All {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  outline: none;
+  opacity: 0;
 }
 /*# sourceMappingURL=default.css.map */

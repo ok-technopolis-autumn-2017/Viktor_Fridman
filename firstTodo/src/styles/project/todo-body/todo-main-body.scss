@@ -2,8 +2,8 @@
 
 
 .main-Body {
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: $c-white;
+  box-shadow: 0 2px 4px $c-shadow;
   position: relative;
   margin: 0 20px;
 }
@@ -13,8 +13,8 @@
   content: '';
   position: absolute;
   top: 100%;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background: $c-white;
+  box-shadow: 0 2px 4px $c-shadow;
   z-index: -1;
 }
 
@@ -30,7 +30,6 @@
   right: 2px;
 }
 
-
 body {
-  background-color: #f5f5f5;
+  background-color: $white-background;
 }

@@ -1,17 +1,15 @@
 @import "../../config/globals";
 
-
 .todo-item{
     margin: 0;
     padding: 0;
-    border-bottom: 1px solid #efefef;
-    border-top: 1px solid #efefef;
+    border-bottom: 1px solid $border-color;
+    border-top: 1px solid $border-color;
 }
 
 .todo-item:hover {
-    background: #fafafa;
+    background: $c-white-dark;
 }
-
 
 .todo-item_text-w {
   overflow: hidden;
@@ -23,8 +21,8 @@
   overflow: hidden;
   box-sizing: border-box;
   background: none;
-  font-size: 24px;
-  color: #666;
+  font-size: $fs_large;
+  color: $c-black-light;
   line-height: 30px;
   font-weight: 200;
   padding-right: 12px;
@@ -43,8 +41,6 @@
   float: left;
 }
 
-
-
 .todo-item_remove-action, .action-remove {
   width: 64px;
   height: 64px;
@@ -56,24 +52,12 @@
   opacity: 1;
 }
 
-
-    .todo-item:hover .todos-item_delete_icon {
-      width: 24px;
-      height: 24px;
-      background: url("../../../images/icons/close.png") no-repeat 0 0;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin: -6px -12px;
+    .todo-item:hover .action-remove {
+      width: 64px;
+      height: 64px;
+      background: $pic-close no-repeat center;
       opacity: 300;
     }
-
-
-
-
-
-
-
 
 .input-checkbox{
   width: 35px;
@@ -92,10 +76,9 @@ float: left;
   opacity: 1;
 }
 
-
-.__ready > .input-checkbox {
+.todo-item.__ready .input-checkbox {
   border: 2px solid #67c5b3;
-  background: url('../../../images/icons/completed.png') no-repeat center;
+  background: $pic-completed no-repeat center;
 }
 
 .todos-item_undone-mark-w{
