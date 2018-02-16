@@ -23,7 +23,7 @@ eventablePrototype.on = function (eventName, handler, ctx) {
     var subscribers = getEventSubscribers(this, eventName, true);
 
     subscribers.push({
-        handler: handler,
+        handler1: handler,
         ctx: ctx
     });
 
@@ -35,7 +35,7 @@ eventablePrototype.off = function (eventName, handler, ctx) {
 
     if (subscribers) {
         for (var i = subscribers.length; i-- ;) {
-            if ((subscribers[i].handler === handler)
+            if ((subscribers[i].handler1 === handler)
                 && (subscribers[i].ctx === ctx)
             ) {
                 subscribers.splice(i, 1);
@@ -53,7 +53,7 @@ eventablePrototype.trigger = function (eventName, data) {
     if (subscribers) {
         var subscribersCopy = subscribers.slice();
         for (var i = 0, l = subscribersCopy.length; i !== l; i += 1) {
-            subscribersCopy[i].handler.call(subscribersCopy[i].ctx, data);
+            subscribersCopy[i].handler1.call(subscribersCopy[i].ctx, data);
         }
     }
 

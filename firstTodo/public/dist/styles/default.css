@@ -189,8 +189,7 @@ body {
   position: relative;
 }
 
-.select-All:hover,
-.select-All:focus {
+.select-All:hover {
   background: #f9f9f9;
   border: none;
 }
@@ -335,6 +334,10 @@ body {
   margin-left: -20px;
   margin-top: -20px;
   opacity: 0;
+}
+
+.todo-item.__hide {
+  display: none;
 }
 
 /* мухахаха */

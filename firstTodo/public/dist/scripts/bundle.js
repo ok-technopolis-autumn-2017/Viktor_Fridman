@@ -114,7 +114,7 @@ eventablePrototype.on = function (eventName, handler, ctx) {
     var subscribers = getEventSubscribers(this, eventName, true);
 
     subscribers.push({
-        handler: handler,
+        handler1: handler,
         ctx: ctx
     });
 
@@ -126,7 +126,7 @@ eventablePrototype.off = function (eventName, handler, ctx) {
 
     if (subscribers) {
         for (var i = subscribers.length; i-- ;) {
-            if ((subscribers[i].handler === handler)
+            if ((subscribers[i].handler1 === handler)
                 && (subscribers[i].ctx === ctx)
             ) {
                 subscribers.splice(i, 1);
@@ -144,7 +144,7 @@ eventablePrototype.trigger = function (eventName, data) {
     if (subscribers) {
         var subscribersCopy = subscribers.slice();
         for (var i = 0, l = subscribersCopy.length; i !== l; i += 1) {
-            subscribersCopy[i].handler.call(subscribersCopy[i].ctx, data);
+            subscribersCopy[i].handler1.call(subscribersCopy[i].ctx, data);
         }
     }
 
@@ -762,7 +762,7 @@ function TodoActionsBarConstructor() {
 
     this._clearCompletedNode.addEventListener('click', this);
 
-    this._filters = new Filter(document.querySelector('.js-todo-Bottom_filter'));
+    this._filters = new Filter(document.querySelector('.js-todo-Bottom-filter'));
 
     this._filters.on('filterSelected', this._onFilterSelected, this);
 }
@@ -849,7 +849,7 @@ var ACTIVE_FILTER_MODIFICATOR = '__active';
 function FilterConstructor(domRoot) {
     this._initEventable();
 
-    var filters = this._filters = domRoot.querySelectorAll('.filter');
+    var filters = this._filters = domRoot.querySelectorAll('.todo-Bottom-Filter');
     this._currentActive = null;
 
     for (var i = filters.length; i-- ;) {
