@@ -5,20 +5,15 @@
     <title>
         Todo Todo Todo-Todo-Todo...
     </title>
-
-    <link rel='stylesheet' type='text/css' href='./dist/styles/default.css'>
-
-    <script src="./dist/scripts/bundle.js"></script>
-
-
 </head>
-
+<link rel='stylesheet' type='text/css' href='./dist/styles/default.css'>
+<script src="./dist/scripts/bundle.js"></script>
 <script type="text/html" id="todoItemTemplate">
     <div class="todo-item">
         <div class="input-checkbox todo-item_ready-checker">
-            <div class="todos-item_undone-mark-icon"></div>
-            <input type="checkbox" class="todos-item_undone-mark-w js-todo-item_mark-ready" aria-label="check item as undone"  title="New todo input"/>
 
+            <input type="checkbox" class="todos-item_undone-mark-w js-todo-item_mark-ready" aria-label="check item as undone"  title="New todo input"/>
+            <div class="todos-item_undone-mark-icon"></div>
         </div>
 
         <div class="action todo-item_remove-action">
@@ -54,6 +49,7 @@
                 <button class="select-All js-todos-select-all" aria-label="select all items as done">
                     <div class="select-All-icon"></div>
                 </button>
+
             </div>
 
             <div class="adder">
@@ -70,7 +66,7 @@
                 0 items left
             </div>
 
-            <div class="todo-Bottom-item-Filter js-todo-Bottom_filter" aria-label="filter block">
+            <div class="todo-Bottom-item-Filter js-todo-Bottom-filter" aria-label="filter block">
                 <button class="todo-Bottom-Filter __active" data-filter="itemFilter_All" name="itemFilter_All" aria-label="filter all items"> All</button>
                 <button class="todo-Bottom-Filter" data-filter="itemFilter_Active" name="itemFilter_Active" aria-label="filter active items"> Active</button>
                 <button class="todo-Bottom-Filter" data-filter="itemFilter_Completed" name="itemFilter_Completed" aria-label="filter completed items"> Completed</button>

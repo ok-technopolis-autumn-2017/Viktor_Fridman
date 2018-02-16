@@ -9,7 +9,7 @@
 .action-remove {
     @include absolute-full();
     }
-    button.select-All, input.select-All {
-        @include reset-input();
-        opacity: 0;
-        }
+    //button.select-All, input.select-All {
+    //    @include reset-input();
+    //    opacity: 0;
+    //    }

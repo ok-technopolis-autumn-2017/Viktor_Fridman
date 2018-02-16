@@ -33,10 +33,14 @@
     border: none;
   }
 
+//  .selector-button{
+//  background: $pic-select-all no-repeat center;
+//}
+
 .select-All-icon {
   width: 24px;
   height: 12px;
-  background: $pic-select-all no-repeat 0 0;
+  background: $pic-select-all no-repeat center;
   position: absolute;
   left: 50%;
   top: 50%;
