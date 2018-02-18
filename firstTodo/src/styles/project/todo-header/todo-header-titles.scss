@@ -1,0 +1,22 @@
+@import "../../config/globals";
+
+.main-title1 {
+    font-size: $fs_title;
+    font-weight: 100;
+    color: $color-title;
+    text-align: center;
+}
+
+.main-title2 {
+    font-size: $fs_title1;
+    font-weight: 200;
+    color: $color-title1;
+    text-align: center;
+}
+
+.main-title3 {
+    font-size: $fs_title2;
+    font-weight: lighter;
+    color: $color-title2;
+    text-align: center;
+}

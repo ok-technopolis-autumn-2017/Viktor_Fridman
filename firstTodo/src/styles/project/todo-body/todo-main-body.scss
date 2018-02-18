@@ -1,0 +1,35 @@
+@import "../../config/globals";
+
+
+.main-Body {
+  background: $c-white;
+  box-shadow: 0 2px 4px $c-shadow;
+  position: relative;
+  margin: 0 20px;
+}
+
+.main-Body:before,
+.main-Body:after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  background: $c-white;
+  box-shadow: 0 2px 4px $c-shadow;
+  z-index: -1;
+}
+
+.main-Body:before {
+  height: 10px;
+  left: 4px;
+  right: 4px;
+}
+
+.main-Body:after {
+  height: 5px;
+  left: 2px;
+  right: 2px;
+}
+
+body {
+  background-color: $white-background;
+}

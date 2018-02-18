@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Todo Todo Todo-Todo-Todo...
+    </title>
+</head>
+<link rel="stylesheet" type="text/css" href="./dist/styles/default.css">
+<script src="./dist/scripts/bundle.js"></script>
+<script type="text/html" id="todoItemTemplate">
+    <div class="todo-item">
+        <div class="input-checkbox todo-item_ready-checker">
+
+            <input type="checkbox" class="todos-item_undone-mark-w js-todo-item_mark-ready" aria-label="check item as undone"  title="New todo input"/>
+            <div class="todos-item_undone-mark-icon"></div>
+        </div>
+
+        <div class="action todo-item_remove-action">
+            <button class="action-remove js-todo-item_remove-action" aria-label="delete item" id="delete_button"></button>
+        </div>
+
+        <div class="todo-item_text-w">
+            <div class="todo-item_text js-todo-item_text" contenteditable="true"></div>
+        </div>
+    </div>
+</script>
+
+<body class = "hover">
+<div class="todos-main-wrapper" align="center">
+    <div class="todo-header">
+        <h1 class="main-title1" align="Left" aria-label="first title">
+            Todo
+        </h1>
+
+        <h1 class="main-title2" align="center" aria-label="second title">
+            Todo
+        </h1>
+
+        <h1 class="main-title3" align="right" aria-label="third title">
+            Todo-Todo-Todo...
+        </h1>
+
+    </div>
+
+    <div class="main-Body js-main-Body" role="main" >
+        <div class = "add-And-Select">
+            <div class = "selector-button todo-add_select-all-action">
+                <button class="select-All js-todos-select-all" aria-label="select all items as done">
+                    <div class="select-All-icon"></div>
+                </button>
+
+            </div>
+
+            <div class="adder">
+                <input class="todo-add_input js-todos-todo-input" type="text" placeholder="What needs to be done?" aria-label="input new item" id="addStringTodos">
+            </div>
+            <div class="todo-List-Bottomborder"></div>
+        </div>
+
+        <div class="todo-List js-todo-List">
+        </div>
+
+        <div class="todo-Bottom">
+            <div class="todo-Bottom-left-Items js-todo-Bottom-left-Items" aria-label="undone items counter">
+                0 items left
+            </div>
+
+            <div class="todo-Bottom-item-Filter js-todo-Bottom-filter" aria-label="filter block">
+                <button class="todo-Bottom-Filter __active" data-filter="itemFilter_All" name="itemFilter_All" aria-label="filter all items"> All</button>
+                <button class="todo-Bottom-Filter" data-filter="itemFilter_Active" name="itemFilter_Active" aria-label="filter active items"> Active</button>
+                <button class="todo-Bottom-Filter" data-filter="itemFilter_Completed" name="itemFilter_Completed" aria-label="filter completed items"> Completed</button>
+            </div>
+
+            <div class="todo-Bottom-clear-Done">
+                <button class="todo-Bottom-clear-Done-button js-todo-Bottom-clear-Done-button" aria-label="clear all done items">Clear done</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

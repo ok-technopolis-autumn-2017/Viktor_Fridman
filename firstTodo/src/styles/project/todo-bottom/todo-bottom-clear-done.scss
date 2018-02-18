@@ -1,0 +1,27 @@
+@import "../../config/globals";
+
+.todo-Bottom-clear-Done {
+  height: 24px;
+  margin: 12px;
+}
+
+.todo-Bottom-clear-Done-button {
+  display: inline;
+  padding: 0;
+  margin: 0;
+  font-size: $fs_normal;
+  color: $c-gray-dark;
+  box-sizing: border-box;
+  border: 2px solid $c-white;
+  border-radius: 2px;
+  cursor: pointer;
+  background: none;
+  outline: none;
+}
+
+.todo-Bottom-clear-Done-button:hover,
+.todo-Bottom-clear-Done-button:focus {
+  border: 2px solid $border-color;
+  border-radius: 2px;
+}
+

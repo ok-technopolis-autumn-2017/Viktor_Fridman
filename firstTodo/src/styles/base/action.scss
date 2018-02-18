@@ -1,0 +1,15 @@
+@import "../config/globals";
+
+
+.action {
+    position: relative;
+    display: inline-block;
+    }
+
+.action-remove {
+    @include absolute-full();
+    }
+    //button.select-All, input.select-All {
+    //    @include reset-input();
+    //    opacity: 0;
+    //    }

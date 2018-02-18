@@ -1,0 +1,16 @@
+@import "../../config/globals";
+.todo-Bottom {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    font-size: $fs_normal;
+    color: $c-gray-dark;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.todo-Bottom-left-Items {
+    margin: 12px;
+    height: 24px;
+}

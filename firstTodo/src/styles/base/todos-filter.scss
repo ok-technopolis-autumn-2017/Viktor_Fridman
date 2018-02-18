@@ -1,0 +1,31 @@
+@import "../config/globals";
+
+.todo-Bottom-Filter{
+  font-size: $small-text-size;
+  color: $c-gray-dark;
+  padding: 0 3px;
+  margin: 0;
+  box-sizing: border-box;
+  border: 2px solid $c-white;
+  border-radius: 2px;
+  background: none;
+  outline: none;
+  cursor: pointer;
+
+}
+
+.todo-Bottom-Filter:hover{
+  border: 2px solid $border-color;
+  border-radius: 2px;
+}
+
+.todo-Bottom-Filter.__active{
+  border: 2px solid $border-color;
+  border-radius: 2px;
+  background: $green;
+}
+
+.todo-Bottom-item-Filter {
+  height: 24px;
+  margin: 12px;
+}
